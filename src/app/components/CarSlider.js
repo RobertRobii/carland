@@ -4,11 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
 import { cars } from "/data/carsData.js";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 
-const CarSlider = () => {
+const CarSlider = async () => {
   return (
     <motion.div
       variants={fadeIn("up", 0.4)}
@@ -44,7 +44,7 @@ const CarSlider = () => {
                     </div>
                     <h3 className="text-lg uppercase font-bold">{car.name}</h3>
                     <div className="mb-10 text-accent font-semibold uppercase">
-                      {car.price}/day
+                      {car.price}€/day
                     </div>
                   </div>
                   <div className="flex jusity-between items-center h-max">

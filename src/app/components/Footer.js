@@ -149,7 +149,7 @@ const Footer = () => {
               onClick={handleRegisterClick}
               className="mt-8 font-semibold text-secondary hover:text-accent hover:underline cursor-pointer"
             >
-              You don't have an account? Register here now!
+              Don't have an account? Register here now!
             </div>
           </div>
         </motion.div>

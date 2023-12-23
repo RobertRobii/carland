@@ -3,7 +3,6 @@
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMediaQuery } from "react-responsive";
 import { BiMenuAltRight, BiX } from "react-icons/bi";
 import { SearchContext } from "../context/search";
 import CareerForm from "../components/CareerForm";
@@ -14,10 +13,6 @@ const Career = () => {
 
   const [header, setHeader] = useState(false);
   const [nav, setNav] = useState(false);
-
-  const desktopMode = useMediaQuery({
-    query: "(min-width: 1300px)",
-  });
 
   useEffect(() => {
     const handleScroll = () => {

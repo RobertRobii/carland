@@ -59,6 +59,16 @@ input[type="file"]::file-selector-button:hover {
   background: #dd242a;
 }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* display: none;
+  -webkit-appearance: none; */
+  margin-right: 13px;
+  font-size: 1.3rem;
+  filter: invert(19%) sepia(74%) saturate(3608%) hue-rotate(352deg)
+    brightness(111%) contrast(89%);
+}
+
 @layer base {
   body {
     @apply text-primary bg-body;
