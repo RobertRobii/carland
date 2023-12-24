@@ -36,7 +36,7 @@ const RegisterForm = () => {
       const { user } = await resUserExists.json();
 
       if (user) {
-        setErrorMsg("User already exists");
+        setErrorMsg("User with this email already exists");
         return;
       }
 

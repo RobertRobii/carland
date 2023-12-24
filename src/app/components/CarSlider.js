@@ -8,7 +8,7 @@ import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 
-const CarSlider = async () => {
+const CarSlider = () => {
   return (
     <motion.div
       variants={fadeIn("up", 0.4)}

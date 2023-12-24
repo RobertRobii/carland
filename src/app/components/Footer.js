@@ -7,14 +7,10 @@ import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaEye, FaEyeSlash, FaUserAlt } from "react-icons/fa";
-import { useState } from "react";
+import LoginForm from "./LoginForm";
 
 const Footer = () => {
   const router = useRouter();
-
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegisterClick = () => {
     router.push("/register");
@@ -110,41 +106,7 @@ const Footer = () => {
             <div className="mb-4 text-secondary">
               Go to your Carland account
             </div>
-            <form className="flex flex-col gap-x-2">
-              <div className="flex justify-start items-center">
-                <input
-                  className="outline-none bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-full"
-                  type="email"
-                  placeholder="Your email"
-                  required
-                />
-                <FaUserAlt className="text-accent text-xl ml-2" />
-              </div>
-              <div className="flex justify-start items-center">
-                <input
-                  className="outline-none mt-2 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-full"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Your password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {showPassword ? (
-                  <FaEyeSlash
-                    className="text-accent text-xl ml-2 cursor-pointer"
-                    onClick={() => setShowPassword(false)}
-                  />
-                ) : (
-                  <FaEye
-                    className="text-accent text-xl ml-2 cursor-pointer"
-                    onClick={() => setShowPassword(true)}
-                  />
-                )}
-              </div>
-              <button className="btn btn-sm btn-accent mt-4 w-24">
-                Sign In
-              </button>
-            </form>
+            <LoginForm />
             <div
               onClick={handleRegisterClick}
               className="mt-8 font-semibold text-secondary hover:text-accent hover:underline cursor-pointer"
