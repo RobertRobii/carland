@@ -7,8 +7,12 @@ import { BiMenuAltRight, BiX } from "react-icons/bi";
 import { SearchContext } from "../context/search";
 import CareerForm from "../components/CareerForm";
 import { FaAngleDoubleLeft } from "react-icons/fa";
+import Copyright from "../components/Copyright";
+import { useSession } from "next-auth/react";
 
 const Career = () => {
+  const { data: session } = useSession();
+
   const { setSearchActive } = useContext(SearchContext);
 
   const [header, setHeader] = useState(false);
@@ -78,13 +82,19 @@ const Career = () => {
               <Link href="/" className="text-accent">
                 Back to Home
               </Link>
+              {session ? (
+                <a href="/account" className="cursor-pointer text-accent ml-6">
+                  My Account
+                </a>
+              ) : null}
             </div>
           </nav>
         </div>
       </header>
 
-      <section className="h-screen bg-white">
+      <section className=" bg-white">
         <CareerForm />
+        <Copyright />
       </section>
     </main>
   );

@@ -7,8 +7,11 @@ import { useMediaQuery } from "react-responsive";
 import { BiMenuAltRight, BiX } from "react-icons/bi";
 import SearchMobile from "./SearchMobile";
 import { SearchContext } from "../context/search";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
+
   const { setSearchActive } = useContext(SearchContext);
 
   const [header, setHeader] = useState(false);
@@ -132,6 +135,11 @@ const Header = () => {
           >
             Contact
           </Link>
+          {session ? (
+            <a href="/account" className="cursor-pointer">
+              My Account
+            </a>
+          ) : null}
           <Link
             className="xl:hidden btn btn-primary btn-sm max-w-[164px] mx-auto"
             to="/"
