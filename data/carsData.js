@@ -5,6 +5,7 @@ export const cars = [
     price: 40,
     star: 4.7,
     image: "/images/carSlider/mercedes-Eclass.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -12,7 +13,7 @@ export const cars = [
       },
       {
         icon: "icons/carSlider/seat.svg",
-        text: "5 Seats",
+        text: "4 Seats",
       },
       {
         icon: "icons/carSlider/gas.svg",
@@ -34,6 +35,7 @@ export const cars = [
     price: 29,
     star: 4.8,
     image: "/images/carSlider/audi-a6.png",
+    available: false,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -63,6 +65,7 @@ export const cars = [
     price: 34,
     star: 4.9,
     image: "/images/carSlider/bmw-3series.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -92,6 +95,7 @@ export const cars = [
     price: 32,
     star: 5.0,
     image: "/images/carSlider/golf-7.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -103,7 +107,7 @@ export const cars = [
       },
       {
         icon: "icons/carSlider/gas.svg",
-        text: "Gas",
+        text: "Diesel",
       },
       {
         icon: "icons/carSlider/engine.svg",
@@ -121,6 +125,7 @@ export const cars = [
     price: 31,
     star: 4.2,
     image: "/images/carSlider/vw-tiguan.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -150,6 +155,7 @@ export const cars = [
     price: 22,
     star: 4.1,
     image: "/images/carSlider/opel-astra.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -179,6 +185,7 @@ export const cars = [
     price: 25,
     star: 3.7,
     image: "/images/carSlider/skoda-rapid.png",
+    available: false,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -204,10 +211,11 @@ export const cars = [
   },
   {
     type: "Small Car",
-    name: "Ford Fiesta",
+    name: "Ford Fiesta ST",
     price: 20,
     star: 3.5,
     image: "/images/carSlider/ford-fiesta.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -227,6 +235,7 @@ export const cars = [
       },
       {
         icon: "icons/carSlider/wheel.svg",
+        available: true,
         text: "Front",
       },
     ],
@@ -237,14 +246,15 @@ export const cars = [
     price: 40,
     star: 4.2,
     image: "/images/carSlider/range-rover.png",
+    available: false,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
-        text: "Manual",
+        text: "Automatic",
       },
       {
         icon: "icons/carSlider/seat.svg",
-        text: "5 Seats",
+        text: "7 Seats",
       },
       {
         icon: "icons/carSlider/gas.svg",
@@ -266,6 +276,7 @@ export const cars = [
     price: 28,
     star: 4.0,
     image: "/images/carSlider/mazda-cx5.png",
+    available: true,
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",

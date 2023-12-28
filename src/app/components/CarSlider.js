@@ -7,8 +7,15 @@ import { cars } from "/data/carsData.js";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
+import { useRouter } from "next/navigation";
 
 const CarSlider = () => {
+  const router = useRouter();
+
+  const handleCarDetails = (carName) => {
+    router.push(`/cars/${carName}`);
+  };
+
   return (
     <motion.div
       variants={fadeIn("up", 0.4)}
@@ -43,8 +50,15 @@ const CarSlider = () => {
                       {car.type}
                     </div>
                     <h3 className="text-lg uppercase font-bold">{car.name}</h3>
-                    <div className="mb-10 text-accent font-semibold uppercase">
-                      {car.price}€/day
+                    <div className="mb-10 font-semibold ">
+                      <p className="text-accent uppercase">{car.price}€/day</p>
+
+                      <p className="text-secondary">
+                        Available now:{" "}
+                        <span className="uppercase">
+                          {car.available ? "Yes" : "No"}
+                        </span>
+                      </p>
                     </div>
                   </div>
                   <div className="flex jusity-between items-center h-max">
@@ -69,7 +83,12 @@ const CarSlider = () => {
                     );
                   })}
                 </div>
-                <button className="btn btn-accent btn-lg">See details</button>
+                <button
+                  onClick={() => handleCarDetails(car.name)}
+                  className="btn btn-accent btn-lg"
+                >
+                  See details
+                </button>
               </div>
             </SwiperSlide>
           );
