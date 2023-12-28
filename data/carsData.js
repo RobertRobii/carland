@@ -5,6 +5,7 @@ export const cars = [
     price: 40,
     star: 4.7,
     image: "/images/carSlider/mercedes-Eclass.png",
+    logo: "/icons/brands/mercedes.svg",
     available: true,
     info: [
       {
@@ -35,6 +36,7 @@ export const cars = [
     price: 29,
     star: 4.8,
     image: "/images/carSlider/audi-a6.png",
+    logo: "/icons/brands/audi.svg",
     available: false,
     info: [
       {
@@ -65,6 +67,7 @@ export const cars = [
     price: 34,
     star: 4.9,
     image: "/images/carSlider/bmw-3series.png",
+    logo: "/icons/brands/bmw.svg",
     available: true,
     info: [
       {
@@ -95,6 +98,7 @@ export const cars = [
     price: 32,
     star: 5.0,
     image: "/images/carSlider/golf-7.png",
+    logo: "/icons/brands/vw.svg",
     available: true,
     info: [
       {
@@ -125,6 +129,7 @@ export const cars = [
     price: 31,
     star: 4.2,
     image: "/images/carSlider/vw-tiguan.png",
+    logo: "/icons/brands/vw.svg",
     available: true,
     info: [
       {
@@ -155,6 +160,7 @@ export const cars = [
     price: 22,
     star: 4.1,
     image: "/images/carSlider/opel-astra.png",
+    logo: "/icons/brands/opel.svg",
     available: true,
     info: [
       {
@@ -185,6 +191,7 @@ export const cars = [
     price: 25,
     star: 3.7,
     image: "/images/carSlider/skoda-rapid.png",
+    logo: "/icons/brands/skoda.svg",
     available: false,
     info: [
       {
@@ -215,6 +222,7 @@ export const cars = [
     price: 20,
     star: 3.5,
     image: "/images/carSlider/ford-fiesta.png",
+    logo: "/icons/brands/ford.svg",
     available: true,
     info: [
       {
@@ -246,6 +254,7 @@ export const cars = [
     price: 40,
     star: 4.2,
     image: "/images/carSlider/range-rover.png",
+    logo: "/icons/brands/mercedes.svg",
     available: false,
     info: [
       {
@@ -276,6 +285,7 @@ export const cars = [
     price: 28,
     star: 4.0,
     image: "/images/carSlider/mazda-cx5.png",
+    logo: "/icons/brands/mazda.svg",
     available: true,
     info: [
       {
