@@ -3,7 +3,6 @@
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { Link } from "react-scroll";
-import { useMediaQuery } from "react-responsive";
 import { BiMenuAltRight, BiX } from "react-icons/bi";
 import SearchMobile from "./SearchMobile";
 import { SearchContext } from "../context/search";
@@ -16,10 +15,6 @@ const Header = () => {
 
   const [header, setHeader] = useState(false);
   const [nav, setNav] = useState(false);
-
-  const desktopMode = useMediaQuery({
-    query: "(min-width: 1300px)",
-  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,12 +45,7 @@ const Header = () => {
       <div className="xl:container mx-auto flex flex-col xl:flex-row xl:items-center xl:justify-between">
         <div className="flex justify-between items-center px-4">
           {/* Logo */}
-          <Link
-            to="home"
-            smooth={desktopMode}
-            spy={true}
-            className="cursor-pointer"
-          >
+          <Link to="home" smooth={true} spy={true} className="cursor-pointer">
             <Image
               src={"/icons/logo.svg"}
               width={194}
@@ -85,7 +75,7 @@ const Header = () => {
             className="cursor-pointer"
             to="home"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             Home
@@ -94,7 +84,7 @@ const Header = () => {
             className="cursor-pointer"
             to="cars"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             Cars
@@ -103,7 +93,7 @@ const Header = () => {
             className="cursor-pointer"
             to="about"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             About
@@ -112,7 +102,7 @@ const Header = () => {
             className="cursor-pointer"
             to="why"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             Why us
@@ -121,7 +111,7 @@ const Header = () => {
             className="cursor-pointer"
             to="testimonial"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             Testimonials
@@ -130,7 +120,7 @@ const Header = () => {
             className="cursor-pointer"
             to="contact"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             Contact
@@ -144,7 +134,7 @@ const Header = () => {
             className="xl:hidden btn btn-primary btn-sm max-w-[164px] mx-auto"
             to="/"
             activeClass="active"
-            smooth={desktopMode}
+            smooth={true}
             spy={true}
           >
             See all cars

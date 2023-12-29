@@ -10,6 +10,7 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
+import { Link } from "react-scroll";
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -106,7 +107,9 @@ const About = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 className="hidden xl:block bg-accent hover:bg-accent-hover rounded-[10px] w-full h-16 uppercase font-medium text-white tracking-[2px] text-[13px] max-w-[184px]"
               >
-                See all cars
+                <Link to="cars" smooth={true} spy={true}>
+                  See all cars
+                </Link>
               </motion.button>
             </div>
           </div>

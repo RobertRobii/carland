@@ -12,6 +12,9 @@ import { fadeIn } from "/variants";
 import CarReviews from "../components/CarReviews";
 import CarDetailsCard from "../components/CarDetailsCard";
 import { useMediaQuery } from "react-responsive";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { FaCircleInfo } from "react-icons/fa6";
 
 const CarDetails = ({ params }) => {
   const carname = params.carName[1];
@@ -19,12 +22,20 @@ const CarDetails = ({ params }) => {
 
   const selectedCar = cars.find((car) => car.name === decodedCarName);
 
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
   const mobileMode = useMediaQuery({
     query: "(max-width: 800px)",
   });
 
-  const handleRentCar = () => {
-    console.log("clicked");
+  const handleRentCar = (e) => {
+    e.preventDefault();
+
+    console.log("name:", fullname);
+    console.log("email:", email);
+    console.log("phone:", phone);
   };
 
   return (
@@ -79,19 +90,58 @@ const CarDetails = ({ params }) => {
                 </motion.div>
               )}
 
-              <motion.div
-                variants={fadeIn("up", 0.8)}
-                initial="hidden"
-                whileInView={"show"}
-                viewport={{ once: true, amount: 0.8 }}
-              >
-                <button
-                  onClick={handleRentCar}
-                  className="btn btn-sm btn-accent xl:w-[134px] hover:bg-accent-hover mt-6"
+              <form>
+                <motion.div
+                  className="flex flex-col"
+                  variants={fadeIn("up", 0.8)}
+                  initial="hidden"
+                  whileInView={"show"}
+                  viewport={{ once: true, amount: 0.8 }}
                 >
-                  Rent
-                </button>
-              </motion.div>
+                  <input
+                    className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                    type="text"
+                    placeholder="Full name"
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                    required
+                  />
+                  <input
+                    className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <PhoneInput
+                    className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                    placeholder="Enter phone number"
+                    value={phone}
+                    onChange={setPhone}
+                    required
+                  />
+                  <div className="flex justity-center xl:justify-start items-center mt-2">
+                    <FaCircleInfo className="text-accent text-xl" />
+                    <p className="ml-2 text-secondary">
+                      It will help us if you'll choose your country!
+                    </p>
+                  </div>
+                </motion.div>
+                <motion.div
+                  variants={fadeIn("up", 0.8)}
+                  initial="hidden"
+                  whileInView={"show"}
+                  viewport={{ once: true, amount: 0.8 }}
+                >
+                  <button
+                    onClick={handleRentCar}
+                    className="btn btn-sm btn-accent xl:w-[134px] hover:bg-accent-hover mt-6"
+                  >
+                    Rent
+                  </button>
+                </motion.div>
+              </form>
             </div>
           )}
         </div>

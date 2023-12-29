@@ -37,7 +37,7 @@ const CarDetailsCard = ({ decodedCarName, mobileMode }) => {
               width={380}
               height={284}
               alt="car image"
-              className="mr-[100px] sm:hidden md:block"
+              className="mr-[100px] sm:hidden md:block drop-shadow-2xl"
             />
           </motion.div>
         )}
