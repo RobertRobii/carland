@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import SecondaryHeader from "../components/SecondaryHeader";
 import { cars } from "/data/carsData";
-import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import Copyright from "../components/Copyright";
 import LocationSelection from "../components/LocationSelection";
@@ -12,13 +10,12 @@ import HoursSelection from "../components/HoursSelection";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import CarReviews from "../components/CarReviews";
+import CarDetailsCard from "../components/CarDetailsCard";
 import { useMediaQuery } from "react-responsive";
 
 const CarDetails = ({ params }) => {
   const carname = params.carName[1];
   const decodedCarName = decodeURIComponent(carname);
-
-  const [error, setError] = useState("");
 
   const selectedCar = cars.find((car) => car.name === decodedCarName);
 
@@ -27,9 +24,7 @@ const CarDetails = ({ params }) => {
   });
 
   const handleRentCar = () => {
-    if (!selectedCar.available) {
-      setError("This car is not available");
-    }
+    console.log("clicked");
   };
 
   return (
@@ -47,77 +42,10 @@ const CarDetails = ({ params }) => {
               Car Details
             </h1>
           </motion.div>
-          <motion.div
-            variants={fadeIn("left", 0.4)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: true, amount: 0.6 }}
-            className="flex justify-between items-center"
-          >
-            <Image
-              src={selectedCar.image}
-              width={380}
-              height={284}
-              alt="car image"
-            />
-            {mobileMode ? null : (
-              <Image
-                src={selectedCar.logo}
-                width={380}
-                height={284}
-                alt="car image"
-                className="mr-[100px] sm:hidden md:block"
-              />
-            )}
-          </motion.div>
-
-          <motion.div
-            variants={fadeIn("up", 0.4)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: true, amount: 0.6 }}
-            className="flex justify-between w-[350px]"
-          >
-            <div>
-              <div className="text-[13px] text-secondary uppercase">
-                {selectedCar.type}
-              </div>
-              <h3 className="text-lg uppercase font-bold">
-                {selectedCar.name}
-              </h3>
-              <div className="mb-1 text-accent font-semibold uppercase">
-                {selectedCar.price}€/day
-              </div>
-              <p className="mb-3 text-secondary">
-                Available now:{" "}
-                <span className="uppercase font-bold">
-                  {selectedCar.available ? "Yes" : "No"}
-                </span>
-              </p>
-            </div>
-            <div className="flex jusity-between items-center h-max">
-              <h3 className="text-lg font-bold mr-2">{selectedCar.star}</h3>
-              <FaStar className="text-accent text-lg" />
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeIn("up", 0.6)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: true, amount: 0.6 }}
-            className="grid grid-cols-2 gap-4 mb-8 xl:flex xl:flex-row"
-          >
-            {selectedCar.info.map((item, index) => {
-              return (
-                <div key={index}>
-                  <div className="text-[15px] uppercase bg-[#F5F5F5] rounded-lg px-3 py-1">
-                    {item.text}
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
+          <CarDetailsCard
+            decodedCarName={decodedCarName}
+            mobileMode={mobileMode}
+          />
 
           {selectedCar.available && (
             <div>
@@ -165,12 +93,6 @@ const CarDetails = ({ params }) => {
                 </button>
               </motion.div>
             </div>
-          )}
-
-          {error && (
-            <p className="flex justify-center items-center w-[220px] bg-accent text-white rounded-lg mt-3 py-1 px-3">
-              {error}
-            </p>
           )}
         </div>
         <motion.div

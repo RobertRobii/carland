@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu } from "@headlessui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
@@ -31,7 +31,9 @@ const LocationSelection = () => {
           {locations.map((location, index) => {
             return (
               <div
-                onClick={() => setLocation(location)}
+                onClick={() => {
+                  setLocation(location);
+                }}
                 key={index}
                 className="cursor-pointer py-4 xl:pl-10 hover:bg-gray-50 text-[13px] uppercase"
               >
