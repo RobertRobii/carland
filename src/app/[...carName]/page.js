@@ -5,6 +5,9 @@ import { FaCircleInfo } from "react-icons/fa6";
 import { useMediaQuery } from "react-responsive";
 import { cars } from "/data/carsData";
 import { format } from "date-fns";
+import { parse } from "date-fns";
+import { differenceInDays } from "date-fns";
+import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
@@ -21,38 +24,91 @@ import CarReviews from "../components/CarReviews";
 import CarDetailsCard from "../components/CarDetailsCard";
 
 const CarDetails = ({ params }) => {
+  const router = useRouter();
   const carname = params.carName[1];
   const decodedCarName = decodeURIComponent(carname);
 
   const selectedCar = cars.find((car) => car.name === decodedCarName);
 
-  const [fullname, setFullname] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  if (!selectedCar) {
+    return <div>Car not found</div>;
+  }
 
   const mobileMode = useMediaQuery({
     query: "(max-width: 800px)",
   });
 
-  const handleRentCar = (e) => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedHours, setSelectedHours] = useState(null);
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleLocation = (location) => {
+    setSelectedLocation(location);
+  };
+
+  const handleDate = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleHours = (hours) => {
+    setSelectedHours(hours);
+  };
+
+  const handleRentCar = async (e) => {
     e.preventDefault();
 
-    console.log("name:", fullname);
-    console.log("email:", email);
-    console.log("phone:", phone);
-  };
+    let daysDifference;
 
-  const handleLocation = (selectedLocation) => {
-    console.log("location:", selectedLocation);
-  };
+    if (selectedDate) {
+      const startDate = selectedDate[0].startDate;
+      const endDate = selectedDate[0].endDate;
 
-  const handleDate = (selectedDate) => {
-    console.log("startDate:", format(selectedDate[0].startDate, "dd/MM/yyyy"));
-    console.log("endDate:", format(selectedDate[0].endDate, "dd/MM/yyyy"));
-  };
+      daysDifference = differenceInDays(endDate, startDate);
+      console.log("Rental days:", daysDifference);
+    }
 
-  const handleHours = (selectedHours) => {
-    console.log("hours:", selectedHours + " - " + selectedHours);
+    try {
+      const res = await fetch("/api/rental", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullname,
+          email,
+          phone,
+          location: selectedLocation,
+          car: decodedCarName,
+          carImage: selectedCar.image,
+          startDate: parse(
+            format(selectedDate[0].startDate, "dd/MM/yyyy"),
+            "dd/MM/yyyy",
+            new Date()
+          ),
+          endDate: parse(
+            format(selectedDate[0].endDate, "dd/MM/yyyy"),
+            "dd/MM/yyyy",
+            new Date()
+          ),
+          pickUpTime: selectedHours,
+          returnTime: selectedHours,
+          pricePerDay: selectedCar.price,
+          totalPrice: daysDifference * selectedCar.price,
+        }),
+      });
+
+      if (res.ok) {
+        console.log("Data sent successfully");
+        router.push("/");
+      } else {
+        console.log("Data failed");
+      }
+    } catch (error) {
+      console.log("Error while sending data:", error);
+    }
   };
 
   return (

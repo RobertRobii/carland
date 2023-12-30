@@ -13,7 +13,15 @@ const RentalSchema = new Schema({
     type: String,
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
   car: {
+    type: String,
+    required: true,
+  },
+  carImage: {
     type: String,
     required: true,
   },
@@ -25,11 +33,11 @@ const RentalSchema = new Schema({
     type: Date,
     required: true,
   },
-  startHour: {
+  pickUpTime: {
     type: String,
     required: true,
   },
-  endHour: {
+  returnTime: {
     type: String,
     required: true,
   },
@@ -43,6 +51,6 @@ const RentalSchema = new Schema({
   },
 });
 
-const Rental = models.Rental || model("Order", RentalSchema);
+const Rental = models.Rental || model("Rental", RentalSchema);
 
 export default Rental;
