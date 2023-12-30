@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const hours = ["10:00 AM", "12:00 PM", "14:00 PM", "16:00 PM", "18:00 PM"];
 
-const HoursSelection = () => {
+const HoursSelection = ({ onhandleHours }) => {
   const [hour, setHour] = useState("10:00 AM");
 
   return (
@@ -28,7 +28,10 @@ const HoursSelection = () => {
           {hours.map((hour, index) => {
             return (
               <div
-                onClick={() => setHour(hour)}
+                onClick={() => {
+                  setHour(hour);
+                  onhandleHours(hour);
+                }}
                 className="cursor-pointer py-4 text-center hover:bg-gray-50"
                 key={index}
               >

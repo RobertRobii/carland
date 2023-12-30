@@ -90,7 +90,7 @@ const Account = () => {
 
       <section className=" bg-white">
         <div className="container mx-auto h-full pt-20 xl:pt-10">
-          <div className="text-center xl:max-w-xl xl:text-left mt-16">
+          <div className="text-center xl:w-full xl:text-left mt-16">
             <h1 className="h1">
               Hello <span className="text-accent">{session?.user?.name}!</span>
             </h1>
@@ -104,124 +104,130 @@ const Account = () => {
             <p className="text-secondary text-xl mt-14 mb-6">
               See your rental history:
             </p>
-            <div className="flex flex-col w-[340px] xl:w-[700px] mb-6 rounded-lg border p-8">
-              <div className="flex flex-col xl:flex-row xl:justify-between ">
-                <div className="flex flex-col items-center">
-                  <Image
-                    src={"/images/carSlider/bmw-3series.png"}
-                    width={180}
-                    height={84}
-                    alt="car-image"
-                  />
-                  <p className="text-secondary">
-                    <span className="font-semibold">Car: </span>BMW 3 Series
-                  </p>
-                </div>
-                <div className="flex flex-col gap-y-2">
-                  <p className="text-secondary">
-                    <span className="font-semibold">Period: </span>24.12.2023 -
-                    30.12.2023
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Hours: </span>12:00 - 12:00
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Price: </span>34€/day
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Total price: </span>238€
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Vehicle condition: </span>
-                    Perfect
-                  </p>
-                </div>
-              </div>
-              <div>
-                <p className="text-secondary mt-4">
-                  <span className="font-semibold">Mentions: </span>
-                  No mentions
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col w-[340px] xl:w-[700px] mb-6 rounded-lg border p-8">
-              <div className="flex flex-col xl:flex-row xl:justify-between ">
-                <div className="flex flex-col items-center">
-                  <Image
-                    src={"/images/carSlider/golf-7.png"}
-                    width={180}
-                    height={84}
-                    alt="car-image"
-                  />
-                  <p className="text-secondary">
-                    <span className="font-semibold">Car: </span>VW Golf 7
-                  </p>
-                </div>
-                <div className="flex flex-col gap-y-2">
-                  <p className="text-secondary">
-                    <span className="font-semibold">Period: </span>24.12.2023 -
-                    30.12.2023
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Hours: </span>12:00 - 12:00
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Price: </span>34€/day
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Total price: </span>238€
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Vehicle condition: </span>
-                    Perfect
-                  </p>
+            <div className="flex flex-col xl:grid xl:grid-cols-2  w-full">
+              <div className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8">
+                <div className="flex flex-col xl:flex-row xl:justify-between ">
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src={"/images/carSlider/bmw-3series.png"}
+                      width={180}
+                      height={84}
+                      alt="car-image"
+                    />
+                    <p className="text-secondary">
+                      <span className="font-semibold">Car: </span>BMW 3 Series
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <p className="text-secondary">
+                      <span className="font-semibold">Period: </span>24.12.2023
+                      - 30.12.2023
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Hours: </span>12:00 -
+                      12:00
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Price: </span>34€/day
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Total price: </span>238€
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div>
-                <p className="text-secondary mt-4">
-                  <span className="font-semibold">Mentions: </span>
-                  No mentions
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col w-[340px] xl:w-[700px] mb-6 rounded-lg border p-8">
-              <div className="flex flex-col xl:flex-row xl:justify-between ">
-                <div className="flex flex-col items-center">
-                  <Image
-                    src={"/images/carSlider/opel-astra.png"}
-                    width={180}
-                    height={84}
-                    alt="car-image"
-                  />
-                  <p className="text-secondary">
-                    <span className="font-semibold">Car: </span>Opel Astra
-                  </p>
-                </div>
-                <div className="flex flex-col gap-y-2">
-                  <p className="text-secondary">
-                    <span className="font-semibold">Period: </span>24.12.2023 -
-                    30.12.2023
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Hours: </span>12:00 - 12:00
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Price: </span>34€/day
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Total price: </span>238€
-                  </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold">Vehicle condition: </span>
-                    Perfect
-                  </p>
+              <div className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8">
+                <div className="flex flex-col xl:flex-row xl:justify-between ">
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src={"/images/carSlider/golf-7.png"}
+                      width={180}
+                      height={84}
+                      alt="car-image"
+                    />
+                    <p className="text-secondary">
+                      <span className="font-semibold">Car: </span>BMW 3 Series
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <p className="text-secondary">
+                      <span className="font-semibold">Period: </span>24.12.2023
+                      - 30.12.2023
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Hours: </span>12:00 -
+                      12:00
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Price: </span>34€/day
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Total price: </span>238€
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div>
-                <p className="text-secondary mt-4">
-                  <span className="font-semibold">Mentions: </span>
-                  No mentions
-                </p>
+              <div className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8">
+                <div className="flex flex-col xl:flex-row xl:justify-between ">
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src={"/images/carSlider/vw-tiguan.png"}
+                      width={180}
+                      height={84}
+                      alt="car-image"
+                    />
+                    <p className="text-secondary">
+                      <span className="font-semibold">Car: </span>BMW 3 Series
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <p className="text-secondary">
+                      <span className="font-semibold">Period: </span>24.12.2023
+                      - 30.12.2023
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Hours: </span>12:00 -
+                      12:00
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Price: </span>34€/day
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Total price: </span>238€
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8">
+                <div className="flex flex-col xl:flex-row xl:justify-between ">
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src={"/images/carSlider/audi-a6.png"}
+                      width={180}
+                      height={84}
+                      alt="car-image"
+                    />
+                    <p className="text-secondary">
+                      <span className="font-semibold">Car: </span>BMW 3 Series
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <p className="text-secondary">
+                      <span className="font-semibold">Period: </span>24.12.2023
+                      - 30.12.2023
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Hours: </span>12:00 -
+                      12:00
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Price: </span>34€/day
+                    </p>
+                    <p className="text-secondary">
+                      <span className="font-semibold">Total price: </span>238€
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

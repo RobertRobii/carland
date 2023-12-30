@@ -7,6 +7,7 @@ import Copyright from "../components/Copyright";
 import LocationSelection from "../components/LocationSelection";
 import DateSelection from "../components/DateSelection";
 import HoursSelection from "../components/HoursSelection";
+import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import CarReviews from "../components/CarReviews";
@@ -36,6 +37,19 @@ const CarDetails = ({ params }) => {
     console.log("name:", fullname);
     console.log("email:", email);
     console.log("phone:", phone);
+  };
+
+  const handleLocation = (selectedLocation) => {
+    console.log("location:", selectedLocation);
+  };
+
+  const handleDate = (selectedDate) => {
+    console.log("startDate:", format(selectedDate[0].startDate, "dd/MM/yyyy"));
+    console.log("endDate:", format(selectedDate[0].endDate, "dd/MM/yyyy"));
+  };
+
+  const handleHours = (selectedHours) => {
+    console.log("hours:", selectedHours + " - " + selectedHours);
   };
 
   return (
@@ -70,9 +84,9 @@ const CarDetails = ({ params }) => {
                 >
                   <div className="container mx-auto">
                     <div className="flex flex-col gap-y-4">
-                      <LocationSelection />
-                      <DateSelection />
-                      <HoursSelection />
+                      <LocationSelection onhandleLocation={handleLocation} />
+                      <DateSelection onhandleDate={handleDate} />
+                      <HoursSelection onhandleHours={handleHours} />
                     </div>
                   </div>
                 </motion.div>
@@ -84,9 +98,9 @@ const CarDetails = ({ params }) => {
                   viewport={{ once: true, amount: 0.6 }}
                   className="flex h-full bg-[#F5F5F5] rounded-lg py-3"
                 >
-                  <LocationSelection />
-                  <DateSelection />
-                  <HoursSelection />
+                  <LocationSelection onhandleLocation={handleLocation} />
+                  <DateSelection onhandleDate={handleDate} />
+                  <HoursSelection onhandleHours={handleHours} />
                 </motion.div>
               )}
 

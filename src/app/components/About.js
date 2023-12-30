@@ -71,7 +71,6 @@ const About = () => {
                     {inView ? (
                       <CountUp start={0} end={50} duration={3} delay={1} />
                     ) : null}
-                    +
                   </div>
                   <div className="uppercase text-[13px] font-semibold text-secondary">
                     car <br /> types

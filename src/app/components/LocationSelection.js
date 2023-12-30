@@ -6,7 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 const locations = ["Brasov, Romania", "Frankfurt, Germany", "Madrid, Spain"];
 
-const LocationSelection = () => {
+const LocationSelection = ({ onhandleLocation }) => {
   const [location, setLocation] = useState("Select location");
 
   return (
@@ -33,6 +33,7 @@ const LocationSelection = () => {
               <div
                 onClick={() => {
                   setLocation(location);
+                  onhandleLocation(location);
                 }}
                 key={index}
                 className="cursor-pointer py-4 xl:pl-10 hover:bg-gray-50 text-[13px] uppercase"

@@ -12,7 +12,7 @@ import { format, addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-const DateSelection = () => {
+const DateSelection = ({ onhandleDate }) => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -45,7 +45,10 @@ const DateSelection = () => {
         </Menu.Button>
         <Menu.Items className="dropdown-menu shadow-lg absolute -top-96 xl:top-[90px] left-1/2 xl:left-0 z-50 transform -translate-x-1/2 xl:-translate-x-0 rounded-[10px] overflow-hidden">
           <DateRange
-            onChange={(item) => setDate([item.selection])}
+            onChange={(item) => {
+              setDate([item.selection]);
+              onhandleDate([item.selection]);
+            }}
             editableDateInputs={true}
             moveRangeOnFirstSelection={false}
             ranges={date}
