@@ -1,21 +1,24 @@
 "use client";
 
-import SecondaryHeader from "../components/SecondaryHeader";
-import { cars } from "/data/carsData";
 import { useState } from "react";
+import { FaCircleInfo } from "react-icons/fa6";
+import { useMediaQuery } from "react-responsive";
+import { cars } from "/data/carsData";
+import { format } from "date-fns";
+
+import { motion } from "framer-motion";
+import { fadeIn } from "/variants";
+
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+
+import SecondaryHeader from "../components/SecondaryHeader";
 import Copyright from "../components/Copyright";
 import LocationSelection from "../components/LocationSelection";
 import DateSelection from "../components/DateSelection";
 import HoursSelection from "../components/HoursSelection";
-import { format } from "date-fns";
-import { motion } from "framer-motion";
-import { fadeIn } from "/variants";
 import CarReviews from "../components/CarReviews";
 import CarDetailsCard from "../components/CarDetailsCard";
-import { useMediaQuery } from "react-responsive";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import { FaCircleInfo } from "react-icons/fa6";
 
 const CarDetails = ({ params }) => {
   const carname = params.carName[1];
