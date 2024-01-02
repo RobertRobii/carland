@@ -89,7 +89,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
             nav ? "max-h-max py-8 px-4 xl:py-0 xl:px-0" : "max-h-0 xl:max-h-max"
           } flex flex-col w-full ${
             isDarkMode ? "bg-neutral-900 text-white" : "bg-white text-black"
-          } gap-y-6 overflow-hidden font-bold xl:font-medium xl:flex-row xl:w-max xl:gap-x-8 xl:h-max xl:bg-transparent xl:pb-0 transition-all duration-150 text-center xl:text-left uppercase text-sm xl:text-[15px] xl:normal-case items-center`}
+          } gap-y-3 overflow-hidden font-bold xl:font-medium xl:flex-row xl:w-max xl:gap-x-8 xl:h-max xl:bg-transparent xl:pb-0 transition-all duration-300  text-center xl:text-left uppercase text-sm xl:text-[15px] xl:normal-case items-center`}
         >
           <Link
             className="cursor-pointer"
@@ -150,13 +150,19 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
               My Account
             </a>
           ) : null}
-          <DarkModeSwitch
-            checked={isDarkMode}
-            onChange={toggleDarkMode}
-            size={25}
-            sunColor="#ed1d24"
-            moonColor="#ed1d24"
-          />
+          <div className="flex items-center">
+            <DarkModeSwitch
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              size={25}
+              sunColor="#ed1d24"
+              moonColor="#ed1d24"
+            />
+            <p className="xl:hidden ml-2">
+              {isDarkMode ? "Dark" : "Light"} Mode
+            </p>
+          </div>
+
           <Link
             className={`xl:hidden btn ${
               isDarkMode ? "btn-accent" : "btn-primary"

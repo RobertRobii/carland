@@ -7,7 +7,11 @@ import { fadeIn } from "/variants";
 
 const Brands = ({ isDarkMode }) => {
   return (
-    <section className="xl:pt-16 xl:h-[200px] bg-blue-600 flex flex-col justify-center">
+    <section
+      className={`xl:pt-16 xl:h-[200px] ${
+        isDarkMode ? "bg-stone-900" : "bg-white"
+      } flex flex-col justify-center`}
+    >
       <motion.div
         variants={fadeIn("up", 0.4)}
         initial="hidden"
@@ -18,23 +22,7 @@ const Brands = ({ isDarkMode }) => {
         <div className="grid grid-cols-3 gap-6 place-items-center xl:flex xl:flex-wrap xl:gap-x-6 xl:justify-between mt-10">
           <div>
             <Image
-              src={"icons/brands/mercedes.svg"}
-              width={60}
-              height={60}
-              alt="mercedes-logo"
-            />
-          </div>
-          <div>
-            <Image
-              src={"icons/brands/audi.svg"}
-              width={85}
-              height={50}
-              alt="audi-logo"
-            />
-          </div>
-          <div>
-            <Image
-              src={"icons/brands/bmw.svg"}
+              src={"/icons/brands/bmw-logo.png"}
               width={60}
               height={60}
               alt="bmw-logo"
@@ -42,23 +30,39 @@ const Brands = ({ isDarkMode }) => {
           </div>
           <div>
             <Image
-              src={"icons/brands/vw.svg"}
-              width={60}
+              src={"/icons/brands/audi-logo.png"}
+              width={100}
+              height={60}
+              alt="audi-logo"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/icons/brands/volkswagen-logo.png"}
+              width={70}
               height={60}
               alt="vw-logo"
             />
           </div>
           <div>
             <Image
-              src={"icons/brands/skoda.svg"}
-              width={60}
+              src={"/icons/brands/mercedes-logo.png"}
+              width={100}
+              height={60}
+              alt="mercedes-logo"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/icons/brands/skoda-logo.png"}
+              width={80}
               height={60}
               alt="skoda-logo"
             />
           </div>
           <div>
             <Image
-              src={"icons/brands/opel.svg"}
+              src={"/icons/brands/opel-logo.png"}
               width={70}
               height={80}
               alt="opel-logo"

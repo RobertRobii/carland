@@ -10,7 +10,7 @@ const Cars = ({ isDarkMode }) => {
       id="cars"
     >
       <div className="container mx-auto">
-        {/* <Brands isDarkMode={isDarkMode} /> */}
+        <Brands isDarkMode={isDarkMode} />
         <CarSlider isDarkMode={isDarkMode} />
       </div>
     </section>
