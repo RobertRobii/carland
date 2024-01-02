@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import { MdHandshake, MdKey, MdTrendingUp } from "react-icons/md";
 
-const Why = () => {
+const Why = ({ isDarkMode }) => {
   return (
     <section className="section flex items-center" id="why">
       <div className="container mx-auto">
@@ -14,7 +14,9 @@ const Why = () => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true, amount: 0.6 }}
-          className="h2 text-center"
+          className={`h2 text-center ${
+            isDarkMode ? "text-white" : "text-black"
+          }`}
         >
           Unmatched excellence and customer satisfaction
         </motion.h2>
@@ -52,7 +54,9 @@ const Why = () => {
         >
           <div className="flex flex-col items-center text-center max-w-[160px] xl:max-w-none p-2 xl:p-0">
             <MdKey className="text-[38px] text-accent mb-4" />
-            <h3 className="h3">Rent simply and quickly</h3>
+            <h3 className={`h3 ${isDarkMode ? "text-white" : "text-black"}`}>
+              Rent simply and quickly
+            </h3>
             <p className="hidden xl:flex">
               We prioritize your need and we go above and beyond to ensure your
               experience with us is nothing short of outstanding.
@@ -60,7 +64,9 @@ const Why = () => {
           </div>
           <div className="flex flex-col items-center text-center max-w-[160px] xl:max-w-none p-2 xl:p-0">
             <MdTrendingUp className="text-[38px] text-accent mb-4" />
-            <h3 className="h3">Modern & well maintained vehicles</h3>
+            <h3 className={`h3 ${isDarkMode ? "text-white" : "text-black"}`}>
+              Modern & well maintained vehicles
+            </h3>
             <p className="hidden xl:flex">
               We prioritize your need and we go above and beyond to ensure your
               experience with us is nothing short of outstanding.
@@ -68,7 +74,9 @@ const Why = () => {
           </div>
           <div className="flex flex-col items-center text-center max-w-[160px] xl:max-w-none p-2 xl:p-0">
             <MdHandshake className="text-[38px] text-accent mb-4" />
-            <h3 className="h3">Prompt and flexible services</h3>
+            <h3 className={`h3 ${isDarkMode ? "text-white" : "text-black"}`}>
+              Prompt and flexible services
+            </h3>
             <p className="hidden xl:flex">
               We prioritize your need and we go above and beyond to ensure your
               experience with us is nothing short of outstanding.

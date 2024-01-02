@@ -30,7 +30,7 @@ const Account = () => {
               See your rental history:
             </p>
             <div className="flex flex-col xl:grid xl:grid-cols-2">
-              <RentalCard />
+              <RentalCard userEmail={session?.user?.email} />
             </div>
           </div>
         </div>

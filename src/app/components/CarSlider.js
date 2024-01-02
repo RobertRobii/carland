@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import { useRouter } from "next/navigation";
 
-const CarSlider = () => {
+const CarSlider = ({ isDarkMode }) => {
   const router = useRouter();
 
   const handleCarDetails = (carName) => {
@@ -22,7 +22,9 @@ const CarSlider = () => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.2 }}
-      className="container mx-auto"
+      className={`container mx-auto ${
+        isDarkMode ? "bg-stone-900" : "bg-white"
+      } transition-all duration-300`}
     >
       <Swiper
         breakpoints={{
@@ -49,7 +51,13 @@ const CarSlider = () => {
                     <div className="text-[13px] text-secondary uppercase">
                       {car.type}
                     </div>
-                    <h3 className="text-lg uppercase font-bold">{car.name}</h3>
+                    <h3
+                      className={`text-lg uppercase font-bold ${
+                        isDarkMode ? "text-white" : "text-black"
+                      }`}
+                    >
+                      {car.name}
+                    </h3>
                     <div className="mb-10 font-semibold ">
                       <p className="text-accent uppercase">{car.price}€/day</p>
 
@@ -62,7 +70,13 @@ const CarSlider = () => {
                     </div>
                   </div>
                   <div className="flex jusity-between items-center h-max">
-                    <h3 className="text-lg font-bold mr-2">{car.star}</h3>
+                    <h3
+                      className={`text-lg font-bold mr-2 ${
+                        isDarkMode ? "text-white" : "text-black"
+                      }`}
+                    >
+                      {car.star}
+                    </h3>
                     <FaStar className="text-accent text-lg" />
                   </div>
                 </div>
@@ -78,7 +92,13 @@ const CarSlider = () => {
                             alt="icon"
                           />
                         </div>
-                        <div className="text-[12px] uppercase">{item.text}</div>
+                        <div
+                          className={`text-[12px] uppercase ${
+                            isDarkMode ? "text-white" : "text-black"
+                          } `}
+                        >
+                          {item.text}
+                        </div>
                       </div>
                     );
                   })}

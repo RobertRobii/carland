@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import Link from "next/link";
 
-const Cta = () => {
+const Cta = ({ isDarkMode }) => {
   return (
     <section
-      className="pt-24 xl:pt-48 flex items-end pb-0 bg-[#b2b7c2]/10 overflow-hidden"
+      className="pt-24 xl:pt-48 flex items-end pb-0  overflow-hidden"
       id="contact"
     >
       <div className="container mx-auto">
@@ -20,7 +20,7 @@ const Cta = () => {
                 initial="hidden"
                 whileInView={"show"}
                 viewport={{ once: true, amount: 0.6 }}
-                className="h2"
+                className={`h2 ${isDarkMode ? "text-white" : "text-black"}`}
               >
                 Download our App now and hit the road with ease
               </motion.h2>

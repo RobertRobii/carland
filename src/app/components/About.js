@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import { Link } from "react-scroll";
 
-const About = () => {
+const About = ({ isDarkMode }) => {
   const [ref, inView] = useInView({
     threshold: 0.5,
   });
@@ -43,7 +43,7 @@ const About = () => {
                 initial="hidden"
                 whileInView={"show"}
                 viewport={{ once: true, amount: 0.6 }}
-                className="h2"
+                className={`h2 ${isDarkMode ? "text-white" : "text-black"}`}
               >
                 Car services simplified
               </motion.h2>
@@ -52,7 +52,7 @@ const About = () => {
                 initial="hidden"
                 whileInView={"show"}
                 viewport={{ once: true, amount: 0.6 }}
-                className="mb-[42px] max-w-md"
+                className={`mb-[42px] max-w-md`}
               >
                 Rent, choose and repair with ease. Our conveninet locations,
                 diverse car types, and reliable repair points ensure a seamless
@@ -67,7 +67,11 @@ const About = () => {
               >
                 <div className="flex flex-col w-[100px]">
                   <MdOutlineDirectionsCar className="text-5xl text-accent mb-2" />
-                  <div className="text-3xl font-black mb-2">
+                  <div
+                    className={`text-3xl font-black mb-2 ${
+                      isDarkMode ? "text-white" : "text-black"
+                    }`}
+                  >
                     {inView ? (
                       <CountUp start={0} end={50} duration={3} delay={1} />
                     ) : null}
@@ -78,7 +82,11 @@ const About = () => {
                 </div>
                 <div className="flex flex-col w-[100px]">
                   <MdOutlineMapsHomeWork className="text-5xl text-accent mb-2" />
-                  <div className="text-3xl font-black mb-2">
+                  <div
+                    className={`text-3xl font-black mb-2 ${
+                      isDarkMode ? "text-white" : "text-black"
+                    }`}
+                  >
                     {inView ? (
                       <CountUp start={0} end={135} duration={3} delay={1} />
                     ) : null}
@@ -89,7 +97,11 @@ const About = () => {
                 </div>
                 <div className="flex flex-col w-[100px]">
                   <MdOutlineBuildCircle className="text-5xl text-accent mb-2" />
-                  <div className="text-3xl font-black mb-2">
+                  <div
+                    className={`text-3xl font-black mb-2 ${
+                      isDarkMode ? "text-white" : "text-black"
+                    }`}
+                  >
                     {inView ? (
                       <CountUp start={0} end={35} duration={3} delay={1} />
                     ) : null}

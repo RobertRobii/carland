@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const hours = ["10:00 AM", "12:00 PM", "14:00 PM", "16:00 PM", "18:00 PM"];
 
-const HoursSelection = ({ onhandleHours }) => {
+const HoursSelection = ({ onhandleHours, isDarkMode }) => {
   const [hour, setHour] = useState("10:00 AM");
 
   return (
@@ -14,7 +14,13 @@ const HoursSelection = ({ onhandleHours }) => {
         <Menu.Button className="dropdown-btn w-full h-full flex flex-col justify-center items-center xl:items-start xl:pl-8">
           <div className="flex flex-col xl:flex-row items-center xl:gap-x-2 gap-y-2 xl:gap-y-0">
             <FaClock className="text-accent" />
-            <div className="text-[15px] uppercase font-bold">Select hours</div>
+            <div
+              className={`text-[15px] uppercase font-bold ${
+                isDarkMode ? "text-white" : "text-black"
+              }`}
+            >
+              Select hours
+            </div>
           </div>
           <div className="flex items-center justify-center gap-x-3">
             <div className="font-medium text-[13px] text-secondary xl:ml-6">

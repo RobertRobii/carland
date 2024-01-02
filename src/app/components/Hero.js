@@ -8,11 +8,16 @@ import { motion, easeInOut } from "framer-motion";
 import { fadeIn } from "/variants";
 import Link from "next/link";
 
-const Hero = () => {
+const Hero = ({ isDarkMode }) => {
   const { searchActive } = useContext(SearchContext);
 
   return (
-    <section className="h-screen xl:h-[90vh] bg-[#b2b7c2]/10" id="home">
+    <section
+      className={`${
+        isDarkMode ? "bg-neutral-900" : "bg-[#b2b7c2]/10"
+      } h-screen xl:h-[90vh] transition-all duration-300`}
+      id="home"
+    >
       <div className="container mx-auto h-full xl:pt-10">
         <div className="flex flex-col xl:flex-row justify-center items-center xl:justify-start h-full">
           <div className="text-center xl:max-w-xl xl:text-left mt-16 xl:mt-0">
@@ -21,7 +26,7 @@ const Hero = () => {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true, amount: 0.6 }}
-              className="h1"
+              className={`${isDarkMode ? "text-white" : "h1"} h1`}
             >
               Explore the Finest <span className="text-accent">Global</span>{" "}
               Offers
@@ -102,7 +107,7 @@ const Hero = () => {
             whileInView={"show"}
             viewport={{ once: true, amount: 0.2 }}
           >
-            <Search />
+            <Search isDarkMode={isDarkMode} />
           </motion.div>
         </div>
       )}

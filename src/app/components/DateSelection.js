@@ -12,7 +12,7 @@ import { format, addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
-const DateSelection = ({ onhandleDate }) => {
+const DateSelection = ({ onhandleDate, isDarkMode }) => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -27,7 +27,13 @@ const DateSelection = ({ onhandleDate }) => {
         <Menu.Button className="dropdown-btn w-full h-full flex flex-col justify-center items-center xl:items-start xl:pl-8">
           <div className="flex flex-col xl:flex-row items-center xl:gap-x-2 gap-y-2 xl:gap-y-0">
             <FaCalendarAlt className="text-accent" />
-            <div className="text-[15px] uppercase font-bold">Select date</div>
+            <div
+              className={`text-[15px] uppercase font-bold ${
+                isDarkMode ? "text-white" : "text-black"
+              }`}
+            >
+              Select date
+            </div>
           </div>
           <div className="flex items-center gap-x-3 xl:ml-6">
             <div className="text-[13px] font-medium text-secondary">

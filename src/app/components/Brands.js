@@ -5,9 +5,9 @@ import { FaAngleDoubleLeft } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 
-const Brands = () => {
+const Brands = ({ isDarkMode }) => {
   return (
-    <section className="xl:pt-16 xl:h-[200px] bg-white flex flex-col justify-center">
+    <section className="xl:pt-16 xl:h-[200px] bg-blue-600 flex flex-col justify-center">
       <motion.div
         variants={fadeIn("up", 0.4)}
         initial="hidden"

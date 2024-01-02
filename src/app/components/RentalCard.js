@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 
-const RentalCard = () => {
+const RentalCard = ({ userEmail }) => {
   const [rentalData, setRentalData] = useState({});
 
   useEffect(() => {
     const getRentals = async () => {
-      const res = await fetch("/api/getRentals");
+      const apiUrl = `/api/getRentals?userEmail=${userEmail}`;
+
+      const res = await fetch(apiUrl);
 
       try {
         if (res.ok) {
@@ -17,12 +19,12 @@ const RentalCard = () => {
           setRentalData(data);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
     getRentals();
-  }, []);
+  }, [userEmail]);
 
   return (
     <div>

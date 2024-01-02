@@ -34,7 +34,7 @@ const testimonialData = [
   },
 ];
 
-const TestimonialSlider = () => {
+const TestimonialSlider = ({ isDarkMode }) => {
   return (
     <>
       <motion.div
@@ -67,7 +67,11 @@ const TestimonialSlider = () => {
               <SwiperSlide key={index}>
                 <div className="flex flex-col justify-center items-center text-center">
                   <FaQuoteLeft className="text-7xl text-accent mb-6" />
-                  <div className="text-2xl max-w-[874px] mb-12 font-medium">
+                  <div
+                    className={`text-2xl max-w-[874px] mb-12 font-medium ${
+                      isDarkMode ? "text-white" : "text-black"
+                    }`}
+                  >
                     {message}
                   </div>
                   <Image
