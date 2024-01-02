@@ -55,12 +55,21 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
         <div className="flex justify-between items-center px-4">
           {/* Logo */}
           <Link to="home" smooth={true} spy={true} className="cursor-pointer">
-            <Image
-              src={"/icons/logo.svg"}
-              width={194}
-              height={64}
-              alt={"logo"}
-            />
+            {isDarkMode ? (
+              <Image
+                src={"/icons/logo.svg"}
+                width={194}
+                height={64}
+                alt={"logo"}
+              />
+            ) : (
+              <Image
+                src={"/icons/logo.svg"}
+                width={194}
+                height={64}
+                alt={"logo"}
+              />
+            )}
           </Link>
           {/* nav open menu */}
           <div
@@ -78,7 +87,9 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
         <nav
           className={`${
             nav ? "max-h-max py-8 px-4 xl:py-0 xl:px-0" : "max-h-0 xl:max-h-max"
-          } flex flex-col w-full bg-white gap-y-6 overflow-hidden font-bold xl:font-medium xl:flex-row xl:w-max xl:gap-x-8 xl:h-max xl:bg-transparent xl:pb-0 transition-all duration-150 text-center xl:text-left uppercase text-sm xl:text-[15px] xl:normal-case items-center`}
+          } flex flex-col w-full ${
+            isDarkMode ? "bg-neutral-900 text-white" : "bg-white text-black"
+          } gap-y-6 overflow-hidden font-bold xl:font-medium xl:flex-row xl:w-max xl:gap-x-8 xl:h-max xl:bg-transparent xl:pb-0 transition-all duration-150 text-center xl:text-left uppercase text-sm xl:text-[15px] xl:normal-case items-center`}
         >
           <Link
             className="cursor-pointer"
@@ -147,7 +158,9 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
             moonColor="#ed1d24"
           />
           <Link
-            className="xl:hidden btn btn-primary btn-sm max-w-[164px] mx-auto"
+            className={`xl:hidden btn ${
+              isDarkMode ? "btn-accent" : "btn-primary"
+            }  btn-sm max-w-[164px] mx-auto`}
             to="/"
             activeClass="active"
             smooth={true}
@@ -155,7 +168,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
           >
             See all cars
           </Link>
-          <SearchMobile />
+          <SearchMobile isDarkMode={isDarkMode} />
         </nav>
       </div>
     </header>

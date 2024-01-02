@@ -6,7 +6,7 @@ import LocationSelection from "./LocationSelection";
 import DateSelection from "./DateSelection";
 import HoursSelection from "./HoursSelection";
 
-const Search = ({ isDarkMode }) => {
+const Search = ({ isDarkMode = true }) => {
   const { searchActive } = useContext(SearchContext);
 
   return (
