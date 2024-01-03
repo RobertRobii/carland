@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run "npm i" to install all the dependencies. Then crate a .env file and create the following variables:
+First, we need to install all the dependencies.
+
+```bash
+npm install
+```
+
+Then crate a .env file and create the following variables:
 
 MONGODB_URI="your mongodb uri",
 NEXTAUTH_SECRET="some hard string to guess",
