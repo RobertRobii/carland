@@ -11,9 +11,9 @@ npm install
 Then crate a .env file and create the following variables:
 
 ```bash
-MONGODB_URI="your mongodb uri",
-NEXTAUTH_SECRET="some hard string to guess",
-NEXTAUTH_URL=http://localhost:3000/,
+MONGODB_URI="your mongodb uri"
+NEXTAUTH_SECRET="some hard string to guess"
+NEXTAUTH_URL=http://localhost:3000/
 ```
 
 After, run the development server:
