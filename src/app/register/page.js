@@ -1,15 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RegisterForm from "../components/RegisterForm";
 import SecondaryHeader from "../components/SecondaryHeader";
+import Loading from "../components/Loading";
 
 const Register = () => {
   const [isDarkMode, setDarkMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <main
@@ -17,16 +25,22 @@ const Register = () => {
         isDarkMode ? "bg-stone-900" : "bg-white"
       } mx-auto relative overflow-hidden`}
     >
-      <SecondaryHeader
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <SecondaryHeader
+            isDarkMode={isDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
 
-      <section
-        className={`h-screen ${isDarkMode ? "bg-stone-900" : "bg-white"}`}
-      >
-        <RegisterForm isDarkMode={isDarkMode} />
-      </section>
+          <section
+            className={`h-screen ${isDarkMode ? "bg-stone-900" : "bg-white"}`}
+          >
+            <RegisterForm isDarkMode={isDarkMode} />
+          </section>
+        </>
+      )}
     </main>
   );
 };
