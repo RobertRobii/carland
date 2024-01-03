@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Carland - Car Rental Web Application
 
+![image](https://github.com/RobertRobii/carland/assets/108672392/04dfd47b-1135-4d07-823f-bd2302bff2f1)
+
 Carland is a modern and user-friendly web application designed for car rentals. It allows users to easily browse available cars, make reservations for specific vehicles, and create an account to manage their reservation history. The application also features a homepage with all the essential information users need, and it includes the option to switch between light and dark mode for enhanced user experience.
 
 ## Features
