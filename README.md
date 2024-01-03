@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, run "npm i" to install all the dependencies. Then crate a .env file and create the following variables:
+
+MONGODB_URI="your mongodb uri"
+NEXTAUTH_SECRET="some hard string to guess"
+NEXTAUTH_URL=http://localhost:3000/
+
+After, run the development server:
 
 ```bash
 npm run dev
@@ -18,19 +24,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Carland - Car Rental Web Application
 
-## Learn More
+Carland is a modern and user-friendly web application designed for car rentals. It allows users to easily browse available cars, make reservations for specific vehicles, and create an account to manage their reservation history. The application also features a homepage with all the essential information users need, and it includes the option to switch between light and dark mode for enhanced user experience.
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Browse Available Cars**: Explore a wide range of available cars with detailed information such as make, model, and rental options.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Make Reservations**: Reserve a car of your choice quickly and easily. Specify the dates and times for your rental period.
 
-## Deploy on Vercel
+- **User Accounts**: Create a personal account to access additional features, including viewing your reservation history and managing your profile.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Homepage Information**: Find all the necessary information on the homepage, providing a seamless user experience.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Light and Dark Mode**: Customize your viewing experience with the option to switch between light and dark mode.
