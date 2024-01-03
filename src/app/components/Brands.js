@@ -10,7 +10,7 @@ const Brands = ({ isDarkMode }) => {
     <section
       className={`xl:pt-16 xl:h-[200px] ${
         isDarkMode ? "bg-stone-900" : "bg-white"
-      } flex flex-col justify-center`}
+      } flex flex-col justify-center transition-all duration-300`}
     >
       <motion.div
         variants={fadeIn("up", 0.4)}

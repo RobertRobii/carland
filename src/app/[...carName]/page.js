@@ -24,6 +24,12 @@ import CarReviews from "../components/CarReviews";
 import CarDetailsCard from "../components/CarDetailsCard";
 
 const CarDetails = ({ params }) => {
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+  };
+
   const router = useRouter();
   const carname = params.carName[1];
   const decodedCarName = decodeURIComponent(carname);
@@ -112,9 +118,20 @@ const CarDetails = ({ params }) => {
   };
 
   return (
-    <main className="max-w-[1920px] bg-white mx-auto relative overflow-hidden">
-      <SecondaryHeader />
-      <section className="bg-white">
+    <main
+      className={`max-w-[1920px] ${
+        isDarkMode ? "bg-stone-900" : "bg-white"
+      } mx-auto relative overflow-hidden`}
+    >
+      <SecondaryHeader
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+      <section
+        className={`${
+          isDarkMode ? "bg-stone-900" : "bg-white"
+        } transition-all duration-300`}
+      >
         <div className="container mx-auto h-full pt-20">
           <motion.div
             variants={fadeIn("down", 0.4)}
@@ -129,6 +146,7 @@ const CarDetails = ({ params }) => {
           <CarDetailsCard
             decodedCarName={decodedCarName}
             mobileMode={mobileMode}
+            isDarkMode={isDarkMode}
           />
 
           {selectedCar.available && (
@@ -224,11 +242,15 @@ const CarDetails = ({ params }) => {
           whileInView={"show"}
           viewport={{ once: true, amount: 0.8 }}
         >
-          <h2 className="container mx-auto flex justify-center xl:justify-start h2 mt-10 mb-10">
+          <h2
+            className={`container mx-auto flex justify-center xl:justify-start h2 mt-10 mb-10 ${
+              isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
             Reviews for this car
           </h2>
         </motion.div>
-        <CarReviews />
+        <CarReviews isDarkMode={isDarkMode} />
         <Copyright />
       </section>
     </main>

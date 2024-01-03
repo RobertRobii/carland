@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 import Copyright from "../components/Copyright";
 import SecondaryHeader from "../components/SecondaryHeader";
@@ -10,13 +11,30 @@ import RentalCard from "../components/RentalCard";
 const Account = () => {
   const { data: session } = useSession();
 
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+  };
+
   return (
-    <main className="max-w-[1920px] bg-white mx-auto relative overflow-hidden">
-      <section className=" bg-white">
-        <SecondaryHeader />
+    <main
+      className={`max-w-[1920px] ${
+        isDarkMode ? "bg-stone-900" : "bg-white"
+      } mx-auto relative overflow-hidden`}
+    >
+      <section
+        className={`${
+          isDarkMode ? "bg-stone-900" : "bg-white"
+        } transition-all duration-300`}
+      >
+        <SecondaryHeader
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
         <div className="container mx-auto h-full pt-20 xl:pt-10">
           <div className="text-center xl:w-full xl:text-left mt-16">
-            <h1 className="h1">
+            <h1 className={`h1 ${isDarkMode ? "text-white" : "text-black"}`}>
               Hello <span className="text-accent">{session?.user?.name}!</span>
             </h1>
             <p className="text-secondary text-xl">Welcome to your account!</p>
@@ -30,11 +48,14 @@ const Account = () => {
               See your rental history:
             </p>
             <div className="flex flex-col xl:grid xl:grid-cols-2">
-              <RentalCard userEmail={session?.user?.email} />
+              <RentalCard
+                userEmail={session?.user?.email}
+                isDarkMode={isDarkMode}
+              />
             </div>
           </div>
         </div>
-        <Copyright />
+        <Copyright isDarkMode={isDarkMode} />
       </section>
     </main>
   );

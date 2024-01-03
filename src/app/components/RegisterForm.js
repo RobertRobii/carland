@@ -7,7 +7,7 @@ import { fadeIn } from "/variants";
 import { FaEye, FaEyeSlash, FaEnvelope } from "react-icons/fa";
 import { RiFileUserFill } from "react-icons/ri";
 
-const RegisterForm = () => {
+const RegisterForm = ({ isDarkMode }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -66,7 +66,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <section className="h-screen bg-white">
+    <section
+      className={`h-screen ${
+        isDarkMode ? "bg-stone-900" : "bg-white"
+      } transition-all duration-300`}
+    >
       <div className="container mx-auto h-full pt-20 xl:pt-10">
         <div className="flex flex-col xl:flex-row justify-center items-center h-full">
           <div className="text-center xl:max-w-xl xl:text-left mt-16 xl:mt-0">
@@ -75,7 +79,9 @@ const RegisterForm = () => {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true, amount: 0.6 }}
-              className="h1 uppercase"
+              className={`h1 uppercase ${
+                isDarkMode ? "text-white" : "text-black"
+              }`}
             >
               Create account
             </motion.h1>

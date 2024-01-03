@@ -162,7 +162,6 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
               {isDarkMode ? "Dark" : "Light"} Mode
             </p>
           </div>
-
           <Link
             className={`xl:hidden btn ${
               isDarkMode ? "btn-accent" : "btn-primary"

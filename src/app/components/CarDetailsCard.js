@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { cars } from "/data/carsData";
 
-const CarDetailsCard = ({ decodedCarName, mobileMode }) => {
+const CarDetailsCard = ({ decodedCarName, mobileMode, isDarkMode }) => {
   const selectedCar = cars.find((car) => car.name === decodedCarName);
 
   return (
@@ -54,11 +54,21 @@ const CarDetailsCard = ({ decodedCarName, mobileMode }) => {
           <div className="text-[13px] text-secondary uppercase">
             {selectedCar.type}
           </div>
-          <h3 className="text-lg uppercase font-bold">{selectedCar.name}</h3>
+          <h3
+            className={`text-lg uppercase font-bold ${
+              isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
+            {selectedCar.name}
+          </h3>
           <div className="mb-1 text-accent font-semibold uppercase">
             {selectedCar.price}€/day
           </div>
-          <p className="mb-3 text-secondary">
+          <p
+            className={`mb-3 text-secondary ${
+              isDarkMode ? "text-white" : "text-black"
+            }`}
+          >
             Available now:{" "}
             <span className="uppercase font-bold">
               {selectedCar.available ? "Yes" : "No"}
