@@ -13,5 +13,6 @@ export const POST = async (request) => {
     return NextResponse.json({ user });
   } catch (error) {
     console.log(error);
+    return NextResponse.json({ message: "Error" });
   }
 };

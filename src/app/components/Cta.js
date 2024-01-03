@@ -7,10 +7,7 @@ import Link from "next/link";
 
 const Cta = ({ isDarkMode }) => {
   return (
-    <section
-      className="pt-24 xl:pt-48 flex items-end pb-0  overflow-hidden"
-      id="contact"
-    >
+    <section className="pt-24 xl:pt-48 flex items-end pb-0  overflow-hidden">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row xl:items-center">
           <div className="flex-1 xl:ml-24 text-center md:text-left mb-12 md:mb-0">

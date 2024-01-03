@@ -21,7 +21,7 @@ const Footer = ({ isDarkMode }) => {
       className={`pt-20 z-20 ${
         isDarkMode ? "bg-stone-900" : "bg-white"
       } transition-all duration-300`}
-      id="info"
+      id="contact"
     >
       <div className="container mx-auto mb-24">
         <div className="mb-10">
