@@ -4,9 +4,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run "npm i" to install all the dependencies. Then crate a .env file and create the following variables:
 
-MONGODB_URI="your mongodb uri"
-NEXTAUTH_SECRET="some hard string to guess"
-NEXTAUTH_URL=http://localhost:3000/
+MONGODB_URI="your mongodb uri",
+NEXTAUTH_SECRET="some hard string to guess",
+NEXTAUTH_URL=http://localhost:3000/,
 
 After, run the development server:
 
