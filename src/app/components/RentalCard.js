@@ -34,7 +34,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   }, [userEmail]);
 
   return (
-    <div>
+    <div className="flex flex-col xl:grid xl:grid-cols-2">
       {isLoading && (
         <SkeletonTheme color={"#f4f4f4"} highlightColor={"#e0e0e0"}>
           <div className="w-[600px] flex justify-between p-4 rounded-lg border mb-10">

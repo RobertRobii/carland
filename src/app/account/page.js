@@ -76,7 +76,7 @@ const Account = () => {
                 <p className="text-secondary text-xl mt-14 mb-6">
                   See your rental history:
                 </p>
-                <div className="flex flex-col xl:grid xl:grid-cols-2">
+                <div>
                   <RentalCard
                     isDarkMode={isDarkMode}
                     userEmail={session?.user?.email}
