@@ -8,6 +8,7 @@ import {
 } from "react-icons/md";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
 import { Link } from "react-scroll";
@@ -16,6 +17,14 @@ const About = ({ isDarkMode }) => {
   const [ref, inView] = useInView({
     threshold: 0.5,
   });
+
+  const [countUpDisplayed, setCountUpDisplayed] = useState(false);
+
+  useEffect(() => {
+    if (inView && !countUpDisplayed) {
+      setCountUpDisplayed(true);
+    }
+  }, [inView, countUpDisplayed]);
 
   return (
     <section className="section flex items-center" id="about" ref={ref}>
@@ -72,7 +81,7 @@ const About = ({ isDarkMode }) => {
                       isDarkMode ? "text-white" : "text-black"
                     }`}
                   >
-                    {inView ? (
+                    {countUpDisplayed ? (
                       <CountUp start={0} end={50} duration={3} delay={1} />
                     ) : null}
                   </div>
@@ -80,6 +89,7 @@ const About = ({ isDarkMode }) => {
                     car <br /> types
                   </div>
                 </div>
+
                 <div className="flex flex-col w-[100px]">
                   <MdOutlineMapsHomeWork className="text-5xl text-accent mb-2" />
                   <div
@@ -87,7 +97,7 @@ const About = ({ isDarkMode }) => {
                       isDarkMode ? "text-white" : "text-black"
                     }`}
                   >
-                    {inView ? (
+                    {countUpDisplayed ? (
                       <CountUp start={0} end={135} duration={3} delay={1} />
                     ) : null}
                   </div>
@@ -102,8 +112,8 @@ const About = ({ isDarkMode }) => {
                       isDarkMode ? "text-white" : "text-black"
                     }`}
                   >
-                    {inView ? (
-                      <CountUp start={0} end={35} duration={3} delay={1} />
+                    {countUpDisplayed ? (
+                      <CountUp start={0} end={25} duration={3} delay={1} />
                     ) : null}
                   </div>
                   <div className="uppercase text-[13px] font-semibold text-secondary">
