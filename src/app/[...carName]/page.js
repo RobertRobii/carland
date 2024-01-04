@@ -25,17 +25,30 @@ import CarDetailsCard from "../components/CarDetailsCard";
 import Loading from "../components/Loading";
 
 const CarDetails = ({ params }) => {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const savedDarkMode = isLocalStorageAvailable
+    ? localStorage.getItem("darkMode")
+    : null;
+  const initialDarkMode = savedDarkMode ? savedDarkMode === "true" : false;
+
+  const [isDarkMode, setDarkMode] = useState(initialDarkMode);
   const [loading, setLoading] = useState(true);
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+
+    if (isLocalStorageAvailable) {
+      localStorage.setItem("darkMode", checked ? "true" : "false");
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
-  const toggleDarkMode = (checked) => {
-    setDarkMode(checked);
-  };
 
   const router = useRouter();
   const carname = params.carName[1];

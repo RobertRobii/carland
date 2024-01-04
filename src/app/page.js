@@ -13,11 +13,23 @@ import Why from "./components/Why";
 import Loading from "./components/Loading";
 
 export default function Home() {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const savedDarkMode = isLocalStorageAvailable
+    ? localStorage.getItem("darkMode")
+    : null;
+  const initialDarkMode = savedDarkMode ? savedDarkMode === "true" : false;
+
+  const [isDarkMode, setDarkMode] = useState(initialDarkMode);
   const [loading, setLoading] = useState(true);
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
+
+    if (isLocalStorageAvailable) {
+      localStorage.setItem("darkMode", checked ? "true" : "false");
+    }
   };
 
   useEffect(() => {
