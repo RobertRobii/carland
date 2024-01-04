@@ -39,9 +39,9 @@ const Account = () => {
 
   return (
     <main
-      className={`max-w-[1920px] h-screen ${
+      className={`max-w-[1920px] min-h-screen ${
         isDarkMode ? "bg-stone-900" : "bg-white"
-      } mx-auto relative`}
+      } mx-auto`}
     >
       {loading ? (
         <Loading />
@@ -50,7 +50,7 @@ const Account = () => {
           <section
             className={`${
               isDarkMode ? "bg-stone-900" : "bg-white"
-            } transition-all duration-300`}
+            } transition-all duration-300 min-h-screen`}
           >
             <SecondaryHeader
               isDarkMode={isDarkMode}
