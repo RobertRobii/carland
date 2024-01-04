@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LoginForm from "./LoginForm";
 import { useSession } from "next-auth/react";
+import Cta from "./Cta";
 
 const Footer = ({ isDarkMode }) => {
   const router = useRouter();
@@ -26,7 +27,8 @@ const Footer = ({ isDarkMode }) => {
       id="contact"
     >
       <div className="container mx-auto mb-24">
-        <div className="mb-10">
+        <Cta isDarkMode={isDarkMode} />
+        <div className="my-10">
           <Image
             src={"/icons/logo.svg"}
             width={200}
@@ -39,7 +41,7 @@ const Footer = ({ isDarkMode }) => {
           variants={fadeIn("up", 0.4)}
           initial="hidden"
           whileInView={"show"}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="flex flex-col lg:flex-row lg:justify-between gap-x-5 gap-y-14"
         >
           <div className="flex flex-col flex-1 gap-y-8">
