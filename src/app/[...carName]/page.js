@@ -57,6 +57,7 @@ const CarDetails = ({ params }) => {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLocation = (location) => {
     setSelectedLocation(location);
@@ -72,6 +73,17 @@ const CarDetails = ({ params }) => {
 
   const handleRentCar = async (e) => {
     e.preventDefault();
+
+    if (!selectedLocation) {
+      setErrorMessage("Please select a location");
+      return;
+    } else if (!selectedDate) {
+      setErrorMessage("Please select a date");
+      return;
+    } else if (!selectedHours) {
+      setErrorMessage("Please select the hours");
+      return;
+    }
 
     let daysDifference;
 
@@ -194,7 +206,13 @@ const CarDetails = ({ params }) => {
                     </motion.div>
                   )}
 
-                  <form>
+                  {errorMessage && (
+                    <p className="flex justify-center items-center w-[300px] bg-accent text-white rounded-lg mt-3 py-1 px-3">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  <form onSubmit={handleRentCar}>
                     <motion.div
                       className="flex flex-col"
                       variants={fadeIn("up", 0.8)}
@@ -238,10 +256,7 @@ const CarDetails = ({ params }) => {
                       whileInView={"show"}
                       viewport={{ once: true, amount: 0.8 }}
                     >
-                      <button
-                        onClick={handleRentCar}
-                        className="btn btn-sm btn-accent xl:w-[134px] hover:bg-accent-hover mt-6"
-                      >
+                      <button className="btn btn-sm btn-accent xl:w-[134px] hover:bg-accent-hover mt-6">
                         Rent
                       </button>
                     </motion.div>

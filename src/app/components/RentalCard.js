@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const RentalCard = ({ userEmail, isDarkMode }) => {
   const [rentalData, setRentalData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getRentals = async () => {
@@ -17,9 +21,11 @@ const RentalCard = ({ userEmail, isDarkMode }) => {
         if (res.ok) {
           const data = await res.json();
           setRentalData(data);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
 
@@ -28,7 +34,22 @@ const RentalCard = ({ userEmail, isDarkMode }) => {
 
   return (
     <div>
-      {rentalData.rentals &&
+      {isLoading && (
+        <SkeletonTheme color={"#f4f4f4"} highlightColor={"#e0e0e0"}>
+          <div className="w-[600px] flex justify-between p-4 rounded-lg border mb-10">
+            <div>
+              <Skeleton count={1} height={120} width={180} className="mb-3" />
+              <Skeleton count={1} width={180} height={22} />
+            </div>
+            <div>
+              <Skeleton count={5} height={22} width={250} className="mb-2" />
+            </div>
+          </div>
+        </SkeletonTheme>
+      )}
+
+      {!isLoading &&
+        rentalData.rentals &&
         rentalData.rentals.map((rental) => (
           <div
             key={rental._id}

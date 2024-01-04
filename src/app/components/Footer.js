@@ -8,9 +8,11 @@ import { fadeIn } from "/variants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LoginForm from "./LoginForm";
+import { useSession } from "next-auth/react";
 
 const Footer = ({ isDarkMode }) => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleRegisterClick = () => {
     router.push("/register");
@@ -189,28 +191,30 @@ const Footer = ({ isDarkMode }) => {
               </div>
             </div>
           </div>
-          <div className="flex-1">
-            <h3
-              className={`h3 font-bold mb-8 ${
-                isDarkMode ? "text-white" : "text-black"
-              }`}
-            >
-              Account
-            </h3>
-            <div className="mb-4 text-secondary">
-              Go to your Carland account
+          {session ? null : (
+            <div className="flex-1">
+              <h3
+                className={`h3 font-bold mb-8 ${
+                  isDarkMode ? "text-white" : "text-black"
+                }`}
+              >
+                Account
+              </h3>
+              <div className="mb-4 text-secondary">
+                Go to your Carland account
+              </div>
+              <LoginForm />
+              <div
+                onClick={handleRegisterClick}
+                className="mt-8 font-semibold text-secondary hover:text-accent hover:underline cursor-pointer"
+              >
+                Don't have an account? Register here now!
+              </div>
             </div>
-            <LoginForm />
-            <div
-              onClick={handleRegisterClick}
-              className="mt-8 font-semibold text-secondary hover:text-accent hover:underline cursor-pointer"
-            >
-              Don't have an account? Register here now!
-            </div>
-          </div>
+          )}
         </motion.div>
       </div>
-      <Copyright />
+      <Copyright isDarkMode={isDarkMode} />
     </footer>
   );
 };

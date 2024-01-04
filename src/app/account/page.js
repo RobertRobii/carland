@@ -27,9 +27,9 @@ const Account = () => {
 
   return (
     <main
-      className={`max-w-[1920px] ${
+      className={`max-w-[1920px] h-screen ${
         isDarkMode ? "bg-stone-900" : "bg-white"
-      } mx-auto relative overflow-hidden`}
+      } mx-auto relative`}
     >
       {loading ? (
         <Loading />
