@@ -7,20 +7,21 @@ import { format } from "date-fns";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const RentalCard = ({ userEmail, isDarkMode }) => {
+const RentalCard = ({ isDarkMode, userEmail }) => {
   const [rentalData, setRentalData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getRentals = async () => {
-      const apiUrl = `/api/getRentals?userEmail=${userEmail}`;
-
-      const res = await fetch(apiUrl);
+      const res = await fetch("/api/getRentals");
 
       try {
         if (res.ok) {
           const data = await res.json();
-          setRentalData(data);
+          const userRentals = data.rentals.filter(
+            (rental) => rental.email === userEmail
+          );
+          setRentalData({ rentals: userRentals });
           setIsLoading(false);
         }
       } catch (error) {

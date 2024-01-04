@@ -66,8 +66,8 @@ const Account = () => {
                 </p>
                 <div className="flex flex-col xl:grid xl:grid-cols-2">
                   <RentalCard
-                    userEmail={session?.user?.email}
                     isDarkMode={isDarkMode}
+                    userEmail={session?.user?.email}
                   />
                 </div>
               </div>
