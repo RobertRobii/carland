@@ -28,8 +28,8 @@ npm install
 Then crate a .env file in the project root folder and create the following variables:
 
 ```bash
-MONGODB_URI="YourMongodbUri/carland"
-NEXTAUTH_SECRET="SomeHardStringToGuess"
+MONGODB_URI=YourMongodbURI
+NEXTAUTH_SECRET=SomeHardStringToGuess
 NEXTAUTH_URL=http://localhost:3000/
 ```
 
