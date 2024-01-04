@@ -25,7 +25,7 @@ First, we need to install all the dependencies.
 npm install
 ```
 
-Then crate a .env file in the project root folder and create the following variables:
+Then create a .env file in the root folder and create the following variables:
 
 ```bash
 MONGODB_URI=YourMongodbURI
