@@ -8,7 +8,7 @@ const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
-      credetials: {},
+      credentials: {}, // Aici era eroarea
 
       async authorize(credentials) {
         const { email, password } = credentials;
