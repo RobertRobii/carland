@@ -24,6 +24,9 @@ import CarReviews from "../components/CarReviews";
 import CarDetailsCard from "../components/CarDetailsCard";
 import Loading from "../components/Loading";
 
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+
 const CarDetails = ({ params }) => {
   const isLocalStorageAvailable =
     typeof window !== "undefined" && window.localStorage;
@@ -152,17 +155,21 @@ const CarDetails = ({ params }) => {
           }),
         });
 
-        if (!response.ok) {
-          console.error("Error while sending data!");
-        }
-
         const data = await response.json();
 
         console.log("Data sent successfully");
         console.log("Email sent successfully");
-        router.push("/");
+        toast.success("A confirmation mail has been sent to you!");
+        setFullname("");
+        setEmail("");
+        setPhone("");
+        setSelectedLocation(null);
+        setSelectedDate(null);
+        setSelectedHours(null);
+        setErrorMessage("");
+        // router.push("/");
       } else {
-        console.log("Data failed");
+        console.error("Error while sending data!");
       }
     } catch (error) {
       console.log("Error while sending data:", error);
@@ -313,6 +320,7 @@ const CarDetails = ({ params }) => {
             </motion.div>
             <CarReviews isDarkMode={isDarkMode} />
             <Copyright />
+            <Toaster />
           </section>
         </>
       )}
