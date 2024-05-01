@@ -139,7 +139,27 @@ const CarDetails = ({ params }) => {
       });
 
       if (res.ok) {
+        const response = await fetch("/api/sendEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message:
+              "Thank you for renting our car. Your booking has been confirmed.",
+          }),
+        });
+
+        if (!response.ok) {
+          console.error("Error while sending data!");
+        }
+
+        const data = await response.json();
+
         console.log("Data sent successfully");
+        console.log("Email sent successfully");
         router.push("/");
       } else {
         console.log("Data failed");
