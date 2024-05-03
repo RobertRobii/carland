@@ -101,14 +101,15 @@ const CarDetails = ({ params }) => {
       return;
     }
 
-    let daysDifference;
+    let daysDifference, adjustedDaysDifference;
 
     if (selectedDate) {
       const startDate = selectedDate[0].startDate;
       const endDate = selectedDate[0].endDate;
 
       daysDifference = differenceInDays(endDate, startDate);
-      console.log("Rental days:", daysDifference);
+      adjustedDaysDifference = daysDifference === 0 ? 1 : daysDifference;
+      console.log("Rental days:", adjustedDaysDifference);
     }
 
     try {
@@ -137,7 +138,7 @@ const CarDetails = ({ params }) => {
           pickUpTime: selectedHours,
           returnTime: selectedHours,
           pricePerDay: selectedCar.price,
-          totalPrice: daysDifference * selectedCar.price,
+          totalPrice: adjustedDaysDifference * selectedCar.price,
         }),
       });
 
@@ -159,7 +160,9 @@ const CarDetails = ({ params }) => {
 
         console.log("Data sent successfully");
         console.log("Email sent successfully");
-        toast.success("A confirmation mail has been sent to you!");
+        toast.success(
+          "Rental confirmed. A confirmation mail has been sent to you!"
+        );
         setFullname("");
         setEmail("");
         setPhone("");
@@ -170,6 +173,7 @@ const CarDetails = ({ params }) => {
         // router.push("/");
       } else {
         console.error("Error while sending data!");
+        toast.error("Failed to rent car. Please try again.");
       }
     } catch (error) {
       console.log("Error while sending data:", error);

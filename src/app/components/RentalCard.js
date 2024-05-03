@@ -4,8 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 
+import { BsTrash3Fill } from "react-icons/bs";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const RentalCard = ({ isDarkMode, userEmail }) => {
   const [rentalData, setRentalData] = useState({});
@@ -32,6 +36,33 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
 
     getRentals();
   }, [userEmail]);
+
+  const handleCancelRental = async (rentalId) => {
+    try {
+      console.log(rentalId);
+
+      const res = await fetch("/api/cancelRental", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rentalId }),
+      });
+
+      if (res.ok) {
+        const updatedRentals = rentalData.rentals.filter(
+          (rental) => rental._id !== rentalId
+        );
+        setRentalData({ rentals: updatedRentals });
+        toast.success("Rental cancelled successfull!");
+      } else {
+        console.error("Failed to cancel rental");
+        toast.error("Failed to cancel rental!");
+      }
+    } catch (error) {
+      console.error("Error cancelling rental:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col xl:grid xl:grid-cols-2">
@@ -129,8 +160,26 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                 </p>
               </div>
             </div>
+            <div className="flex justify-center items-center pl-1 mt-6">
+              {new Date(rental.endDate) < new Date() ? (
+                <p className="text-secondary text-lg">
+                  Ai finalizat calatoria aceasta masina!
+                </p>
+              ) : (
+                <>
+                  <BsTrash3Fill className="text-accent mr-2 text-xl" />
+                  <p
+                    onClick={() => handleCancelRental(rental._id)}
+                    className="text-secondary text-lg hover:text-accent cursor-pointer hover:underline"
+                  >
+                    Anuleaza rezervarea
+                  </p>
+                </>
+              )}
+            </div>
           </div>
         ))}
+      <Toaster />
     </div>
   );
 };
