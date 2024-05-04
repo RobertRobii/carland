@@ -12,7 +12,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
 const RentalCard = ({ isDarkMode, userEmail }) => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [rentalData, setRentalData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
@@ -60,19 +66,44 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           (rental) => rental._id !== rentalId
         );
         setRentalData({ rentals: updatedRentals });
-        toast.success("Rental cancelled successfull!");
+
+        const response = await fetch("/api/sendCancelRentalEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: session?.user?.name,
+            email: session?.user?.email,
+            message:
+              "Your cancelation has been confirmed! Please let us know why you chose to cancel your rental.",
+          }),
+        });
+
+        const data = await response.json();
+
+        console.log("Data sent successfully");
+        console.log("Email sent successfully");
+        toast.success(
+          "Rental cancelled successfull! You'll receive a confirmation email shortly.",
+          { duration: 5000 }
+        );
       } else {
         console.error("Failed to cancel rental");
-        toast.error("Failed to cancel rental!");
+        toast.error("Failed to cancel rental!", { duration: 5000 });
       }
     } catch (error) {
       console.error("Error cancelling rental:", error);
     }
   };
 
+  const handleClickReview = (carName) => {
+    router.push(`/cars/${carName}`);
+  };
+
   return (
     <div>
-      <div className="flex flex-col xl:grid xl:grid-cols-2">
+      <div className="flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:flex-wrap lg:px-20 xl:px-0">
         {isLoading && (
           <SkeletonTheme color={"#f4f4f4"} highlightColor={"#e0e0e0"}>
             <div className="w-[600px] flex justify-between p-4 rounded-lg border mb-10">
@@ -92,7 +123,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           rentalData.rentals.map((rental) => (
             <div
               key={rental._id}
-              className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8 transition-all duration-300"
+              className="flex flex-col w-[340px] xl:w-[550px] mb-6 rounded-lg border p-8 transition-all duration-300 hover:shadow-2xl"
             >
               <div className="flex flex-col xl:flex-row xl:justify-between ">
                 <div className="flex flex-col items-center">
@@ -169,9 +200,17 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
               </div>
               <div className="flex justify-center items-center pl-1 mt-6">
                 {new Date(rental.endDate) < new Date() ? (
-                  <p className="text-secondary text-lg">
-                    Ai finalizat calatoria aceasta masina!
-                  </p>
+                  <div className="flex flex-col items-center">
+                    <p className="text-secondary text-lg">
+                      Ai finalizat calatoria aceasta masina!
+                    </p>
+                    <button
+                      onClick={() => handleClickReview(rental.car)}
+                      className="text-accent text-lg hover:underline"
+                    >
+                      Click aici pentru a lasa un review!
+                    </button>
+                  </div>
                 ) : (
                   <>
                     <BsTrash3Fill className="text-accent mr-2 text-xl" />

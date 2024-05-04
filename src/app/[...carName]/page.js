@@ -161,7 +161,8 @@ const CarDetails = ({ params }) => {
         console.log("Data sent successfully");
         console.log("Email sent successfully");
         toast.success(
-          "Rental confirmed. A confirmation mail has been sent to you!"
+          "Rental confirmed. A confirmation mail has been sent to you!",
+          { duration: 5000 }
         );
         setFullname("");
         setEmail("");
@@ -173,7 +174,9 @@ const CarDetails = ({ params }) => {
         // router.push("/");
       } else {
         console.error("Error while sending data!");
-        toast.error("Failed to rent car. Please try again.");
+        toast.error("Failed to rent car. Please try again.", {
+          duration: 5000,
+        });
       }
     } catch (error) {
       console.log("Error while sending data:", error);
