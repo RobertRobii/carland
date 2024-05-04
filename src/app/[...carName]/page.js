@@ -21,6 +21,7 @@ import LocationSelection from "../components/LocationSelection";
 import DateSelection from "../components/DateSelection";
 import HoursSelection from "../components/HoursSelection";
 import CarReviews from "../components/CarReviews";
+import ReviewForm from "../components/ReviewForm";
 import CarDetailsCard from "../components/CarDetailsCard";
 import Loading from "../components/Loading";
 
@@ -326,6 +327,14 @@ const CarDetails = ({ params }) => {
               </h2>
             </motion.div>
             <CarReviews isDarkMode={isDarkMode} />
+            <motion.div
+              variants={fadeIn("up", 0.8)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: true, amount: 0.8 }}
+            >
+              <ReviewForm isDarkMode={isDarkMode} />
+            </motion.div>
             <Copyright />
             <Toaster />
           </section>
