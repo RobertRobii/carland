@@ -43,6 +43,7 @@ const LoginForm = () => {
           placeholder="Your email"
           required
           value={email}
+          autoComplete="email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <FaUserAlt className="text-accent text-xl ml-2" />
