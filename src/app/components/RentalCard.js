@@ -5,7 +5,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 
 import { BsTrash3Fill } from "react-icons/bs";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle, FaPen } from "react-icons/fa";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -118,8 +118,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           </SkeletonTheme>
         )}
 
-        {!isLoading &&
-          rentalData.rentals &&
+        {!isLoading && rentalData.rentals && rentalData.rentals.length > 0 ? (
           rentalData.rentals.map((rental) => (
             <div
               key={rental._id}
@@ -201,26 +200,30 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
               <div className="flex justify-center items-center pl-1 mt-6">
                 {new Date(rental.endDate) < new Date() ? (
                   <div className="flex flex-col items-center">
-                    <p className="text-secondary text-lg">
-                      Ai finalizat calatoria aceasta masina!
+                    <p className="text-secondary text-lg mb-6">
+                      Ai finalizat calatoria cu aceasta masina!
                     </p>
-                    <button
+                    <div
                       onClick={() => handleClickReview(rental.car)}
-                      className="text-accent text-lg hover:underline"
+                      className="flex items-center text-lg hover:bg-accent text-accent hover:text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
                     >
-                      Click aici pentru a lasa un review!
-                    </button>
+                      <FaPen className="mr-2 text-xl" />
+                      Scrie un review
+                    </div>
                   </div>
                 ) : (
-                  <>
-                    <BsTrash3Fill className="text-accent mr-2 text-xl" />
-                    <p
-                      onClick={openCancelModal}
-                      className="text-secondary text-lg hover:text-accent cursor-pointer hover:underline"
-                    >
-                      Anuleaza rezervarea
+                  <div className="flex flex-col items-center">
+                    <p className="text-secondary text-lg mb-6">
+                      Inca nu ai inceput calatoria cu aceasta masina!
                     </p>
-                  </>
+                    <div
+                      onClick={openCancelModal}
+                      className="flex items-center text-lg hover:bg-accent text-accent hover:text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
+                    >
+                      <BsTrash3Fill className="mr-2 text-xl" />
+                      Anuleaza rezervarea
+                    </div>
+                  </div>
                 )}
               </div>
 
@@ -268,7 +271,13 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                 )}
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="h2 text-center text-accent mt-10">
+            There are no rentals yet!
+          </div>
+        )}
+
         <Toaster />
       </div>
     </div>

@@ -85,7 +85,7 @@ const ReviewForm = ({ isDarkMode }) => {
             />
           </div>
           <textarea
-            className="outline-none mt-4 bg-white border rounded-lg p-4 focus:border-accent w-[300px] lg:w-[620px] h-[130px] xl:min-w-full resize-none"
+            className="outline-none mt-4 bg-white border rounded-lg p-4 focus:border-accent w-[300px] lg:w-[620px] xl:min-w-full h-[210px] lg:h-[130px] resize-none"
             value={reviewMessage}
             onChange={(e) => setReviewMessage(e.target.value)}
             placeholder="Your review..."
@@ -95,9 +95,11 @@ const ReviewForm = ({ isDarkMode }) => {
             maxLength={maxLength}
             minLength={10}
           ></textarea>
-          <p className="flex ml-auto mt-2">
-            {reviewMessage.length}/{maxLength} characters
-          </p>
+          <div className="w-[300px] lg:w-[620px] xl:min-w-full">
+            <p className="flex justify-end items-end mt-2">
+              {reviewMessage.length}/{maxLength} characters
+            </p>
+          </div>
         </motion.div>
         <motion.div
           variants={fadeIn("up", 0.8)}
@@ -107,7 +109,7 @@ const ReviewForm = ({ isDarkMode }) => {
         >
           <button
             onClick={handleReview}
-            className="btn btn-sm btn-accent mx-auto lg:mx-0 w-[134px] hover:bg-accent-hover mt-6"
+            className="btn btn-sm btn-accent mx-auto xl:mx-0 w-[134px] hover:bg-accent-hover mt-6"
           >
             Publish
           </button>

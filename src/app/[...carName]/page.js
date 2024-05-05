@@ -293,7 +293,7 @@ const CarDetails = ({ params }) => {
                       />
                       <div className="flex justity-center xl:justify-start items-center mt-2">
                         <FaCircleInfo className="text-accent text-xl" />
-                        <p className="ml-2 text-secondary">
+                        <p className="ml-2 text-secondary text-center lg:text-left">
                           It will help us if you'll choose your country!
                         </p>
                       </div>
@@ -304,7 +304,7 @@ const CarDetails = ({ params }) => {
                       whileInView={"show"}
                       viewport={{ once: true, amount: 0.8 }}
                     >
-                      <button className="btn btn-sm btn-accent xl:w-[134px] hover:bg-accent-hover mt-6">
+                      <button className="btn btn-sm btn-accent w-[120px] xl:w-[134px] hover:bg-accent-hover mt-6">
                         Rent
                       </button>
                     </motion.div>
@@ -312,7 +312,7 @@ const CarDetails = ({ params }) => {
                 </div>
               )}
             </div>
-            <motion.div
+            {/* <motion.div
               variants={fadeIn("up", 0.8)}
               initial="hidden"
               whileInView={"show"}
@@ -323,10 +323,10 @@ const CarDetails = ({ params }) => {
                   isDarkMode ? "text-white" : "text-black"
                 }`}
               >
-                Reviews for this car
+                Reviews section
               </h2>
             </motion.div>
-            <CarReviews isDarkMode={isDarkMode} />
+            <CarReviews isDarkMode={isDarkMode} /> */}
             <motion.div
               variants={fadeIn("up", 0.8)}
               initial="hidden"

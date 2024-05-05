@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Copyright from "../components/Copyright";
 import SecondaryHeader from "../components/SecondaryHeader";
 import RentalCard from "../components/RentalCard";
+import ReviewsHistory from "../components/ReviewsHistory";
 import Loading from "../components/Loading";
 
 const Account = () => {
@@ -36,6 +37,19 @@ const Account = () => {
       setLoading(false);
     }, 1000);
   }, []);
+
+  const [isRentalHistoryActive, setRentalHistoryActive] = useState(true);
+  const [isReviewHistoryActive, setReviewHistoryActive] = useState(false);
+
+  const handleRentalHistory = () => {
+    setRentalHistoryActive(true);
+    setReviewHistoryActive(false);
+  };
+
+  const handleReviewHistory = () => {
+    setReviewHistoryActive(true);
+    setRentalHistoryActive(false);
+  };
 
   return (
     <main
@@ -73,14 +87,60 @@ const Account = () => {
                 >
                   Sign Out
                 </button>
-                <p className="text-secondary text-xl mt-14 mb-6">
-                  See your rental history:
-                </p>
+                <div className="flex flex-col lg:flex-row justify-between max-h-[100px] max-w-[700px] my-10 mx-auto xl:mx-0 xl:max-w-[550px]">
+                  {isRentalHistoryActive ? (
+                    <button
+                      onClick={handleRentalHistory}
+                      className="mx-auto lg:mx-0 max-w-[200px] text-white bg-accent text-xl mt-0 mb-4 xl:mb-0 cursor-pointer border border-accent py-2 px-4 rounded-lg hover:bg-white hover:text-accent transition-all duration-300"
+                    >
+                      Rental history
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleRentalHistory}
+                      className="mx-auto lg:mx-0 max-w-[200px] text-accent text-xl mt-0 mb-4 xl:mb-0 cursor-pointer border border-accent py-2 px-4 rounded-lg hover:bg-accent hover:text-white transition-all duration-300"
+                    >
+                      Rental history
+                    </button>
+                  )}
+
+                  {isReviewHistoryActive ? (
+                    <p
+                      onClick={handleReviewHistory}
+                      className="mx-auto lg:mx-0 max-w-[200px] text-white bg-accent text-xl mt-0 mb-4 xl:mb-0 cursor-pointer border border-accent hover:border-accent py-2 px-4 rounded-lg hover:bg-white hover:text-accent transition-all duration-300"
+                    >
+                      Review history
+                    </p>
+                  ) : (
+                    <p
+                      onClick={handleReviewHistory}
+                      className="mx-auto lg:mx-0 max-w-[200px] text-accent text-xl mt-0 mb-4 xl:mb-0 cursor-pointer border border-accent hover:border-accent py-2 px-4 rounded-lg hover:bg-accent hover:text-white transition-all duration-300"
+                    >
+                      Review history
+                    </p>
+                  )}
+                </div>
+                {isRentalHistoryActive ? (
+                  <p className="mb-4">
+                    Currently you are viewing rental history!
+                  </p>
+                ) : (
+                  <p className="mb-4">
+                    Currently you are viewing review history!
+                  </p>
+                )}
                 <div>
-                  <RentalCard
-                    isDarkMode={isDarkMode}
-                    userEmail={session?.user?.email}
-                  />
+                  {isReviewHistoryActive ? (
+                    <ReviewsHistory
+                      sDarkMode={isDarkMode}
+                      userEmail={session?.user?.email}
+                    />
+                  ) : (
+                    <RentalCard
+                      isDarkMode={isDarkMode}
+                      userEmail={session?.user?.email}
+                    />
+                  )}
                 </div>
               </div>
             </div>
