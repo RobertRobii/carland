@@ -2,10 +2,17 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "/utils/mongodb";
 import Review from "/models/Review";
 
-export async function PUT(request) {
+export async function POST(request) {
   try {
     await connectMongoDB();
-    const {} = await request.json();
+
+    const requestBody = await request.json();
+
+    const { id, reviewMessage, fullname } = requestBody;
+
+    console.log("Date primite:", { id, reviewMessage, fullname });
+
+    await Review.findByIdAndUpdate(id, { reviewMessage, fullname });
 
     return NextResponse.json({
       success: true,

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const [reviewsData, setReviewsData] = useState({ reviews: [] });
-  const [editModeIndex, setEditModeIndex] = useState(-1);
+  const [editModeIndex, setEditModeIndex] = useState(null);
   const [editedReview, setEditedReview] = useState({
     reviewMessage: "",
     fullname: "",
@@ -33,27 +33,52 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   }, [userEmail]);
 
   useEffect(() => {
-    if (editModeIndex !== -1 && textareaRef.current) {
+    if (editModeIndex !== null && textareaRef.current) {
       textareaRef.current.focus();
     }
   }, [editModeIndex]);
 
-  const handleEditReview = (index, reviewMessage, fullname) => {
-    setEditModeIndex(index);
+  const handleEditReview = (id, reviewMessage, fullname) => {
+    setEditModeIndex(id);
     setEditedReview({ reviewMessage, fullname });
   };
 
-  const handleSaveReview = (index) => {
+  const handleSaveReview = async (id) => {
     const updatedReviewsData = [...reviewsData.reviews];
-    updatedReviewsData[index] = {
-      ...updatedReviewsData[index],
+    const reviewIndex = updatedReviewsData.findIndex(
+      (review) => review._id === id
+    );
+    updatedReviewsData[reviewIndex] = {
+      ...updatedReviewsData[reviewIndex],
       reviewMessage: editedReview.reviewMessage,
       fullname: editedReview.fullname,
     };
     setReviewsData({ reviews: updatedReviewsData });
 
-    // Oprește modul de editare
-    setEditModeIndex(-1);
+    setEditModeIndex(null);
+
+    try {
+      console.log(id, editedReview.reviewMessage, editedReview.fullname);
+
+      const res = await fetch(`/api/updateReview`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+          reviewMessage: editedReview.reviewMessage,
+          fullname: editedReview.fullname,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to update review");
+      }
+      const data = await res.json();
+      console.log("Review updated successfully");
+    } catch (error) {
+      console.error("Error updating review:", error);
+    }
   };
 
   const handleChange = (event, field) => {
@@ -66,9 +91,9 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   return (
     <div className="flex flex-col xl:flex-row justify-center items-center xl:justify-between gap-x-10 flex-wrap">
       {reviewsData.reviews.length > 0 ? (
-        reviewsData.reviews.map((review, index) => (
+        reviewsData.reviews.map((review) => (
           <div
-            key={index}
+            key={review._id}
             className="flex flex-col justify-center items-center text-center border mb-10 lg:min-w-[600px] max-w-[600px] py-8 hover:shadow-2xl rounded-lg px-4"
           >
             <div
@@ -76,7 +101,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
                 isDarkMode ? "text-white" : "text-black"
               }`}
             >
-              {editModeIndex === index ? (
+              {editModeIndex === review._id ? (
                 <textarea
                   ref={textareaRef}
                   value={editedReview.reviewMessage}
@@ -91,7 +116,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
             </div>
             <div className="mb-8">
               <p>Posted on: </p>
-              {editModeIndex === index ? (
+              {editModeIndex === review._id ? (
                 <input
                   ref={inputRef}
                   value={editedReview.fullname}
@@ -111,9 +136,9 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
                 isDarkMode ? "text-white" : "text-black"
               }`}
             >
-              {editModeIndex === index ? (
+              {editModeIndex === review._id ? (
                 <button
-                  onClick={() => handleSaveReview(index)}
+                  onClick={() => handleSaveReview(review._id)}
                   className="flex items-center text-lg bg-accent text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
                 >
                   Save
@@ -122,7 +147,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
                 <button
                   onClick={() =>
                     handleEditReview(
-                      index,
+                      review._id,
                       review.reviewMessage,
                       review.fullname
                     )
