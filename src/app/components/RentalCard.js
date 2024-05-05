@@ -104,7 +104,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:flex-wrap lg:px-20 xl:px-0">
-        {isLoading && (
+        {/* {isLoading && (
           <SkeletonTheme color={"#f4f4f4"} highlightColor={"#e0e0e0"}>
             <div className="w-[600px] flex justify-between p-4 rounded-lg border mb-10">
               <div>
@@ -116,9 +116,9 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
               </div>
             </div>
           </SkeletonTheme>
-        )}
+        )} */}
 
-        {!isLoading && rentalData.rentals && rentalData.rentals.length > 0 ? (
+        {rentalData.rentals && rentalData.rentals.length > 0 ? (
           rentalData.rentals.map((rental) => (
             <div
               key={rental._id}
