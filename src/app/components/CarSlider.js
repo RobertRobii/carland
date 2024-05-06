@@ -33,7 +33,7 @@ const CarSlider = ({ isDarkMode }) => {
           1260: { slidesPerView: 3, spaceBetween: 32 },
         }}
       >
-        {cars.map((car, index) => {
+        {cars.slice(0, 6).map((car, index) => {
           return (
             <SwiperSlide key={index}>
               <div className="max-w-[385px] mx-auto sm:mx-0">

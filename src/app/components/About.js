@@ -128,9 +128,7 @@ const About = ({ isDarkMode }) => {
                 viewport={{ once: true, amount: 0.2 }}
                 className="xl:block bg-accent hover:bg-accent-hover rounded-[10px] w-full h-16 uppercase font-medium text-white tracking-[2px] text-[13px] max-w-[184px]"
               >
-                <Link to="cars" smooth={true} spy={true}>
-                  See all cars
-                </Link>
+                <a href="/cars">See all cars</a>
               </motion.button>
             </div>
           </div>
