@@ -1,10 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import Loading from "../components/Loading";
+import Copyright from "../components/Copyright";
 import SecondaryHeader from "../components/SecondaryHeader";
+
 import { cars } from "/data/carsData.js";
 import { FaStar } from "react-icons/fa";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -70,7 +74,10 @@ const Cars = () => {
               <div className="flex justify-center flex-wrap gap-x-10 gap-y-10 py-10">
                 {cars.map((car, index) => {
                   return (
-                    <div key={index} className="max-w-[385px] mx-auto sm:mx-0">
+                    <div
+                      key={index}
+                      className="max-w-[385px] mx-auto sm:mx-0 p-4 rounded-lg hover:shadow-xl"
+                    >
                       <div className="h-[270px]">
                         <Image
                           src={car.image}
@@ -154,6 +161,7 @@ const Cars = () => {
               </div>
             </div>
           </div>
+          <Copyright isDarkMode={isDarkMode} />
         </section>
       )}
     </main>
