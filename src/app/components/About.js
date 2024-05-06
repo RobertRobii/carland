@@ -126,7 +126,7 @@ const About = ({ isDarkMode }) => {
                 initial="hidden"
                 whileInView={"show"}
                 viewport={{ once: true, amount: 0.2 }}
-                className="hidden xl:block bg-accent hover:bg-accent-hover rounded-[10px] w-full h-16 uppercase font-medium text-white tracking-[2px] text-[13px] max-w-[184px]"
+                className="xl:block bg-accent hover:bg-accent-hover rounded-[10px] w-full h-16 uppercase font-medium text-white tracking-[2px] text-[13px] max-w-[184px]"
               >
                 <Link to="cars" smooth={true} spy={true}>
                   See all cars

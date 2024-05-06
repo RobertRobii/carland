@@ -75,7 +75,17 @@ const Brands = ({ isDarkMode }) => {
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: true, amount: 0.6 }}
-        className="flex items-center justify-center xl:justify-start mt-10"
+      >
+        <h1 className="h2 mt-10 flex justify-center xl:justify-start">
+          Our Top Picks
+        </h1>
+      </motion.div>
+      <motion.div
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: true, amount: 0.6 }}
+        className="flex items-center justify-center xl:justify-start mb-8"
       >
         <FaAngleDoubleLeft className="text-accent mr-1" />
         <p className="font-semibold text-accent">Swipe Left to see more cars</p>

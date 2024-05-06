@@ -22,7 +22,7 @@ const CarSlider = ({ isDarkMode }) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.2 }}
-      className={`container mx-auto ${
+      className={`container mx-auto mb-[170px] lg:mb-0 ${
         isDarkMode ? "bg-stone-900" : "bg-white"
       } transition-all duration-300`}
     >
