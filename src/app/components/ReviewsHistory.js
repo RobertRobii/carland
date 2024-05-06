@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 
 import { format } from "date-fns";
-import { parse } from "date-fns";
+
+import { FaInfoCircle } from "react-icons/fa";
 
 const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const [reviewsData, setReviewsData] = useState({ reviews: [] });
@@ -21,6 +22,12 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const maxLength = 150;
 
   const [initialReview, setInitialReview] = useState(null);
+
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
+  const openCancelModal = () => {
+    setIsCancelModalOpen(true);
+  };
 
   useEffect(() => {
     const getReviews = async () => {
@@ -114,6 +121,35 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
     }));
   };
 
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      console.log(reviewId);
+
+      const res = await fetch("/api/deleteReview", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reviewId }),
+      });
+
+      if (res.ok) {
+        const updatedReviews = reviewsData.reviews.filter(
+          (review) => review._id !== reviewId
+        );
+        setReviewsData({ reviews: updatedReviews });
+
+        console.log("Data sent successfully");
+        toast.success("Review deleted successfully!", { duration: 5000 });
+      } else {
+        console.error("Failed to delete review");
+        toast.error("Failed to delete review!", { duration: 5000 });
+      }
+    } catch (error) {
+      console.error("Error deleting review:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col xl:flex-row justify-center items-center xl:justify-between gap-x-10 flex-wrap">
       {reviewsData.reviews.length > 0 ? (
@@ -174,12 +210,20 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
               }`}
             >
               {editModeIndex === review._id ? (
-                <button
-                  onClick={() => handleSaveReview(review._id)}
-                  className="flex items-center text-lg bg-accent text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
-                >
-                  Save
-                </button>
+                <div className="flex gap-x-4 items-center">
+                  <button
+                    onClick={() => handleSaveReview(review._id)}
+                    className="flex items-center text-lg bg-accent text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={() => setIsCancelModalOpen(true)}
+                    className="flex items-center text-lg bg-accent text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
+                  >
+                    Delete
+                  </button>
+                </div>
               ) : (
                 <button
                   onClick={() =>
@@ -193,6 +237,50 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
                 >
                   Edit
                 </button>
+              )}
+            </div>
+
+            <div>
+              {isCancelModalOpen && (
+                <div
+                  className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-30 z-50"
+                  onClick={() => setIsCancelModalOpen(false)}
+                >
+                  <div
+                    className="bg-white p-8 rounded-lg w-[300px] lg:w-[450px]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  >
+                    <div className="flex justify-start items-center mb-4">
+                      <FaInfoCircle className="text-accent text-xl mr-2" />
+                      <h2 className="text-xl lg:text-2xl font-bold">
+                        Delete review
+                      </h2>
+                    </div>
+
+                    <p className="mb-6 text-xl">
+                      Are you sure you want to delete this review?
+                    </p>
+                    <div className="flex flex-col lg:flex-row justify-between">
+                      <button
+                        className="bg-white text-accent py-2 px-4 rounded-lg mr-4 border border-accent hover:bg-accent hover:text-white transition-all duration-300 mb-4 lg:mb-0"
+                        onClick={() => setIsCancelModalOpen(false)}
+                      >
+                        No, take me back!
+                      </button>
+                      <button
+                        className="bg-green-500 text-white py-2 px-4 rounded-lg mr-4 border border-green-500 hover:bg-white hover:text-green-500 transition-all duration-300"
+                        onClick={() => {
+                          handleDeleteReview(review._id);
+                          setIsCancelModalOpen(false);
+                        }}
+                      >
+                        Yes, I'm sure!
+                      </button>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           </div>

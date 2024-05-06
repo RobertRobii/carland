@@ -173,7 +173,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                     >
                       Hours:{" "}
                     </span>
-                    {rental.pickUpTime} -{rental.returnTime}
+                    {rental.pickUpTime} - {rental.returnTime}
                   </p>
                   <p className="text-secondary">
                     <span
@@ -221,7 +221,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                       className="flex items-center text-lg hover:bg-accent text-accent hover:text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
                     >
                       <BsTrash3Fill className="mr-2 text-xl" />
-                      Anuleaza rezervarea
+                      Cancel rental
                     </div>
                   </div>
                 )}
