@@ -18,6 +18,10 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const textareaRef = useRef(null);
   const inputRef = useRef(null);
 
+  const maxLength = 150;
+
+  const [initialReview, setInitialReview] = useState(null);
+
   useEffect(() => {
     const getReviews = async () => {
       const res = await fetch("/api/getReviews");
@@ -47,6 +51,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const handleEditReview = (id, reviewMessage, fullname) => {
     setEditModeIndex(id);
     setEditedReview({ reviewMessage, fullname });
+    setInitialReview({ reviewMessage, fullname });
   };
 
   const handleSaveReview = async (id) => {
@@ -54,6 +59,19 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
     const reviewIndex = updatedReviewsData.findIndex(
       (review) => review._id === id
     );
+
+    // Verificarea dacă revizuirea a fost modificată
+    const isModified =
+      updatedReviewsData[reviewIndex].reviewMessage !==
+        editedReview.reviewMessage ||
+      updatedReviewsData[reviewIndex].fullname !== editedReview.fullname;
+
+    if (!isModified) {
+      // Dacă recenzia nu a fost modificată, ieșim din funcție
+      setEditModeIndex(null);
+      return;
+    }
+
     updatedReviewsData[reviewIndex] = {
       ...updatedReviewsData[reviewIndex],
       reviewMessage: editedReview.reviewMessage,
@@ -110,12 +128,18 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
               }`}
             >
               {editModeIndex === review._id ? (
-                <textarea
-                  ref={textareaRef}
-                  value={editedReview.reviewMessage}
-                  className="text-center resize-none w-[300px] lg:w-[510px] h-[230px] lg:h-[160px] focus:outline-accent p-4 focus:rounded-lg"
-                  onChange={(event) => handleChange(event, "reviewMessage")}
-                />
+                <>
+                  <textarea
+                    ref={textareaRef}
+                    value={editedReview.reviewMessage}
+                    className="text-center resize-none w-[300px] lg:w-[510px] h-[230px] lg:h-[160px] focus:outline-accent p-4 focus:rounded-lg"
+                    onChange={(event) => handleChange(event, "reviewMessage")}
+                    maxLength={maxLength} // Adăugarea atributului maxLength la textarea
+                  />
+                  <p className="flex justify-end items-end mt-2 text-sm">
+                    {editedReview.reviewMessage.length}/{maxLength} characters
+                  </p>
+                </>
               ) : (
                 <div className="w-[300px] lg:w-[510px] min-h-[160px] p-4">
                   {review.reviewMessage}

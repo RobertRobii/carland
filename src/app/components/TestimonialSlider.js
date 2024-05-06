@@ -32,6 +32,14 @@ const TestimonialSlider = ({ isDarkMode }) => {
     getReviwes();
   }, []);
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   return (
     <>
       <motion.div
@@ -59,7 +67,7 @@ const TestimonialSlider = ({ isDarkMode }) => {
           className="h-[450px] xl:h-[400px]"
         >
           {reviewsData.reviews &&
-            reviewsData.reviews.reviews.map((review, index) => {
+            shuffleArray(reviewsData.reviews.reviews).map((review, index) => {
               return (
                 <SwiperSlide key={index}>
                   <div className="flex flex-col justify-center items-center text-center">
