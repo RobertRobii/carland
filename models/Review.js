@@ -13,6 +13,15 @@ const ReviewSchema = new Schema({
     type: String,
     required: true,
   },
+  postedDate: {
+    type: Date,
+    default: Date.now,
+    required: true,
+  },
+  isEdited: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Review = models.Review || model("Review", ReviewSchema);

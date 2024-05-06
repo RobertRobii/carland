@@ -8,11 +8,7 @@ import { fadeIn } from "/variants";
 import { toast } from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 
-import { useRouter } from "next/navigation";
-
 const ReviewForm = ({ isDarkMode }) => {
-  const router = useRouter();
-
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [reviewMessage, setReviewMessage] = useState("");
@@ -34,8 +30,6 @@ const ReviewForm = ({ isDarkMode }) => {
       });
 
       if (res.ok) {
-        console.log("Review published successfully.");
-
         toast.success(
           "Review published successfully. Thank you for your feedback!",
           { duration: 5000 }
@@ -43,7 +37,6 @@ const ReviewForm = ({ isDarkMode }) => {
         setFullname("");
         setEmail("");
         setReviewMessage("");
-        router.reload();
       } else {
         console.error("Error while sending data!");
         toast.error("Failed to publish review. Please try again.", {

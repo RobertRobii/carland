@@ -2,6 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+
+import { format } from "date-fns";
+import { parse } from "date-fns";
+
 const ReviewsHistory = ({ isDarkMode, userEmail }) => {
   const [reviewsData, setReviewsData] = useState({ reviews: [] });
   const [editModeIndex, setEditModeIndex] = useState(null);
@@ -52,6 +58,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
       ...updatedReviewsData[reviewIndex],
       reviewMessage: editedReview.reviewMessage,
       fullname: editedReview.fullname,
+      isEdited: true,
     };
     setReviewsData({ reviews: updatedReviewsData });
 
@@ -69,13 +76,14 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
           id: id,
           reviewMessage: editedReview.reviewMessage,
           fullname: editedReview.fullname,
+          isEdited: true,
         }),
       });
       if (!res.ok) {
         throw new Error("Failed to update review");
       }
       const data = await res.json();
-      console.log("Review updated successfully");
+      toast.success("Review updated successfully", { duration: 5000 });
     } catch (error) {
       console.error("Error updating review:", error);
     }
@@ -115,18 +123,23 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
               )}
             </div>
             <div className="mb-8">
-              <p>Posted on: </p>
+              <p>{review.isEdited ? "Edited" : "Posted"} on</p>
+              <p className="textlg text-black font-semibold">
+                {review.postedDate &&
+                  format(new Date(review.postedDate), "dd.MM.yyyy")}
+              </p>
+              <p>By</p>
               {editModeIndex === review._id ? (
                 <input
                   ref={inputRef}
                   value={editedReview.fullname}
-                  className="text-center text-lg focus:outline-accent focus:rounded-lg"
+                  className="text-center text-lg focus:outline-accent focus:rounded-lg font-semibold"
                   onChange={(event) => handleChange(event, "fullname")}
                 />
               ) : (
                 <input
                   value={review.fullname}
-                  className="text-center text-lg outline-none"
+                  className="text-center text-lg outline-none font-semibold"
                   readOnly
                 />
               )}
@@ -165,6 +178,7 @@ const ReviewsHistory = ({ isDarkMode, userEmail }) => {
           There are no reviews yet!
         </div>
       )}
+      <Toaster />
     </div>
   );
 };

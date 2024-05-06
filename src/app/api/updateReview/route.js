@@ -8,11 +8,16 @@ export async function POST(request) {
 
     const requestBody = await request.json();
 
-    const { id, reviewMessage, fullname } = requestBody;
+    const { id, reviewMessage, fullname, isEdited } = requestBody;
 
-    console.log("Date primite:", { id, reviewMessage, fullname });
+    await Review.findByIdAndUpdate(id, {
+      reviewMessage,
+      fullname,
+      isEdited: true,
+      postedDate: new Date(),
+    });
 
-    await Review.findByIdAndUpdate(id, { reviewMessage, fullname });
+    console.log("Date primite:", { id, reviewMessage, fullname, isEdited });
 
     return NextResponse.json({
       success: true,
