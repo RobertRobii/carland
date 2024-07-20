@@ -69,9 +69,14 @@ const CarDetailsCard = ({ decodedCarName, mobileMode, isDarkMode }) => {
               isDarkMode ? "text-white" : "text-black"
             }`}
           >
-            Available now:{" "}
-            <span className="uppercase font-bold">
-              {selectedCar.available ? "Yes" : "No"}
+            Available in:{" "}
+            <span className="uppercase">
+              {selectedCar.availableCities.map((city, index) => (
+                <span key={city}>
+                  {city}
+                  {index < selectedCar.availableCities.length - 1 && ", "}
+                </span>
+              ))}
             </span>
           </p>
         </div>

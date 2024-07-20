@@ -220,97 +220,95 @@ const CarDetails = ({ params }) => {
                 isDarkMode={isDarkMode}
               />
 
-              {selectedCar.available && (
-                <div>
-                  {mobileMode ? (
-                    <motion.div
-                      variants={fadeIn("up", 0.8)}
-                      initial="hidden"
-                      whileInView={"show"}
-                      viewport={{ once: true, amount: 0.6 }}
-                      className="xl:hidden font-medium"
-                    >
-                      <div className="container mx-auto">
-                        <div className="flex flex-col gap-y-4">
-                          <LocationSelection
-                            onhandleLocation={handleLocation}
-                          />
-                          <DateSelection onhandleDate={handleDate} />
-                          <HoursSelection onhandleHours={handleHours} />
-                        </div>
+              {/* {selectedCar.available && ( */}
+              <div>
+                {mobileMode ? (
+                  <motion.div
+                    variants={fadeIn("up", 0.8)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: true, amount: 0.6 }}
+                    className="xl:hidden font-medium"
+                  >
+                    <div className="container mx-auto">
+                      <div className="flex flex-col gap-y-4">
+                        <LocationSelection onhandleLocation={handleLocation} />
+                        <DateSelection onhandleDate={handleDate} />
+                        <HoursSelection onhandleHours={handleHours} />
                       </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      variants={fadeIn("up", 0.8)}
-                      initial="hidden"
-                      whileInView={"show"}
-                      viewport={{ once: true, amount: 0.6 }}
-                      className="flex h-full bg-[#F5F5F5] rounded-lg py-3"
-                    >
-                      <LocationSelection onhandleLocation={handleLocation} />
-                      <DateSelection onhandleDate={handleDate} />
-                      <HoursSelection onhandleHours={handleHours} />
-                    </motion.div>
-                  )}
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    variants={fadeIn("up", 0.8)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: true, amount: 0.6 }}
+                    className="flex h-full bg-[#F5F5F5] rounded-lg py-3"
+                  >
+                    <LocationSelection onhandleLocation={handleLocation} />
+                    <DateSelection onhandleDate={handleDate} />
+                    <HoursSelection onhandleHours={handleHours} />
+                  </motion.div>
+                )}
 
-                  {errorMessage && (
-                    <p className="flex justify-center items-center w-[300px] bg-accent text-white rounded-lg mt-3 py-1 px-3">
-                      {errorMessage}
-                    </p>
-                  )}
+                {errorMessage && (
+                  <p className="flex justify-center items-center w-[300px] bg-accent text-white rounded-lg mt-3 py-1 px-3">
+                    {errorMessage}
+                  </p>
+                )}
 
-                  <form onSubmit={handleRentCar}>
-                    <motion.div
-                      className="flex flex-col"
-                      variants={fadeIn("up", 0.8)}
-                      initial="hidden"
-                      whileInView={"show"}
-                      viewport={{ once: true, amount: 0.8 }}
-                    >
-                      <input
-                        className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
-                        type="text"
-                        placeholder="Full name"
-                        value={fullname}
-                        onChange={(e) => setFullname(e.target.value)}
-                        required
-                      />
-                      <input
-                        className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
-                        type="email"
-                        placeholder="Your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                      />
-                      <PhoneInput
-                        className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
-                        placeholder="Enter phone number"
-                        value={phone}
-                        onChange={setPhone}
-                        required
-                      />
-                      <div className="flex justity-center xl:justify-start items-center mt-2">
-                        <FaCircleInfo className="text-accent text-xl" />
-                        <p className="ml-2 text-secondary text-center lg:text-left">
-                          It will help us if you'll choose your country!
-                        </p>
-                      </div>
-                    </motion.div>
-                    <motion.div
-                      variants={fadeIn("up", 0.8)}
-                      initial="hidden"
-                      whileInView={"show"}
-                      viewport={{ once: true, amount: 0.8 }}
-                    >
-                      <button className="btn btn-sm btn-accent w-[120px] xl:w-[134px] hover:bg-accent-hover mt-6">
-                        Rent
-                      </button>
-                    </motion.div>
-                  </form>
-                </div>
-              )}
+                <form onSubmit={handleRentCar}>
+                  <motion.div
+                    className="flex flex-col"
+                    variants={fadeIn("up", 0.8)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: true, amount: 0.8 }}
+                  >
+                    <input
+                      className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                      type="text"
+                      placeholder="Full name"
+                      value={fullname}
+                      onChange={(e) => setFullname(e.target.value)}
+                      required
+                    />
+                    <input
+                      className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                      type="email"
+                      placeholder="Your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <PhoneInput
+                      className="outline-none mt-4 bg-white h-14 border rounded-lg pl-4 focus:border-accent xl:w-[300px]"
+                      placeholder="Enter phone number"
+                      value={phone}
+                      onChange={setPhone}
+                      required
+                    />
+                    <div className="flex justity-center xl:justify-start items-center mt-2">
+                      <FaCircleInfo className="text-accent text-xl" />
+                      <p className="ml-2 text-secondary text-center lg:text-left">
+                        It will help us if you'll choose your country!
+                      </p>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    variants={fadeIn("up", 0.8)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: true, amount: 0.8 }}
+                  >
+                    <button className="btn btn-sm btn-accent w-[120px] xl:w-[134px] hover:bg-accent-hover mt-6">
+                      Rent
+                    </button>
+                  </motion.div>
+                </form>
+              </div>
+              {/* )} */}
             </div>
             {/* <motion.div
               variants={fadeIn("up", 0.8)}

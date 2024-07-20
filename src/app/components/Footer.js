@@ -44,7 +44,7 @@ const Footer = ({ isDarkMode }) => {
           viewport={{ once: true, amount: 0.2 }}
           className="flex flex-col lg:flex-row lg:justify-between gap-x-5 gap-y-14"
         >
-          <div className="flex flex-col flex-1 gap-y-8">
+          <div className="flex flex-col flex-1 gap-y-8" id="info">
             <div className="flex flex-col gap-y-4 font-semibold">
               <h3
                 className={`h3 font-bold mb-8 ${

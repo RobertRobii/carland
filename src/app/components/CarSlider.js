@@ -62,9 +62,14 @@ const CarSlider = ({ isDarkMode }) => {
                       <p className="text-accent uppercase">{car.price}€/day</p>
 
                       <p className="text-secondary">
-                        Available now:{" "}
+                        Available in:{" "}
                         <span className="uppercase">
-                          {car.available ? "Yes" : "No"}
+                          {car.availableCities.map((city, index) => (
+                            <span key={city}>
+                              {city}
+                              {index < car.availableCities.length - 1 && ", "}
+                            </span>
+                          ))}
                         </span>
                       </p>
                     </div>
