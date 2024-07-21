@@ -43,6 +43,8 @@ const CarSlider = ({ isDarkMode }) => {
     router.push(`/cars/${carName}`);
   };
 
+  console.log(topPicks);
+
   return (
     <motion.div
       variants={fadeIn("up", 0.4)}
@@ -89,10 +91,10 @@ const CarSlider = ({ isDarkMode }) => {
                       <p className="text-accent uppercase">
                         {car.pricePerDay}€/day
                       </p>
-                      <p className="text-secondary">
+                      {/* <p className="text-secondary">
                         Available in:{" "}
                         <span className="uppercase">{car.location}</span>
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <div className="flex justify-between items-center h-max">
@@ -106,8 +108,8 @@ const CarSlider = ({ isDarkMode }) => {
                     <FaStar className="text-accent text-lg" />
                   </div>
                 </div>
-                <div className="flex gap-x-3 xl:gap-x-4 w-max mb-10">
-                  {/* {car.info.map((item, index) => (
+                {/* <div className="flex gap-x-3 xl:gap-x-4 w-max mb-10">
+                  {car.info.map((item, index) => (
                     <div key={index} className="flex flex-col items-center">
                       <div className="bg-primary w-12 h-12 rounded-full flex justify-center items-center mb-2">
                         <Image
@@ -125,8 +127,8 @@ const CarSlider = ({ isDarkMode }) => {
                         {item.text}
                       </div>
                     </div>
-                  ))} */}
-                </div>
+                  ))}
+                </div> */}
                 <button
                   onClick={() => handleCarDetails(car.car)}
                   className="btn btn-accent btn-lg"

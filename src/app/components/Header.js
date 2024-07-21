@@ -145,15 +145,6 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
           >
             Contact
           </Link>
-          <Link
-            className="cursor-pointer"
-            to="info"
-            activeClass="active"
-            smooth={true}
-            spy={true}
-          >
-            Info
-          </Link>
           {session ? (
             <a href="/account" className="cursor-pointer">
               My Account

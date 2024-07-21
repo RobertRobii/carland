@@ -27,7 +27,7 @@ const About = ({ isDarkMode }) => {
   }, [inView, countUpDisplayed]);
 
   return (
-    <section className="section flex items-center" id="about" ref={ref}>
+    <section className="section flex items-center mb-20" id="about" ref={ref}>
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row xl:justify-between">
           <motion.div
