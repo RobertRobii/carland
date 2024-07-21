@@ -140,6 +140,7 @@ const CarDetails = ({ params }) => {
           returnTime: selectedHours,
           pricePerDay: selectedCar.price,
           totalPrice: adjustedDaysDifference * selectedCar.price,
+          totalRentals: 1,
         }),
       });
 

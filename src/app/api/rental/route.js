@@ -18,6 +18,7 @@ export async function POST(request) {
       returnTime,
       pricePerDay,
       totalPrice,
+      totalRentals,
     } = await request.json();
 
     console.log("Date primite:", {
@@ -33,7 +34,16 @@ export async function POST(request) {
       returnTime,
       pricePerDay,
       totalPrice,
+      totalRentals,
     });
+
+    // Check if any rentals exist with the same car name
+    const existingRentals = await Rental.find({ car });
+
+    if (existingRentals.length > 0) {
+      // Increment totalRentals for all rentals with the same car
+      await Rental.updateMany({ car }, { $inc: { totalRentals: 1 } });
+    }
 
     const newRental = new Rental({
       fullname,
@@ -48,7 +58,10 @@ export async function POST(request) {
       returnTime,
       pricePerDay,
       totalPrice,
+      totalRentals:
+        existingRentals.length > 0 ? totalRentals + 1 : totalRentals,
     });
+
     await newRental.save();
     console.log("Datele au fost salvate cu succes în baza de date!");
 

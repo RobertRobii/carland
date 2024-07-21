@@ -49,6 +49,11 @@ const RentalSchema = new Schema({
     type: Number,
     required: true,
   },
+  totalRentals: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
 });
 
 const Rental = models.Rental || model("Rental", RentalSchema);
