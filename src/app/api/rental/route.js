@@ -37,8 +37,37 @@ export async function POST(request) {
       totalRentals,
     });
 
-    // Check if any rentals exist with the same car name
+    // Convert date strings to Date objects
+    const newStartDate = new Date(startDate);
+    const newEndDate = new Date(endDate);
+
+    // Fetch all rentals for the same car
     const existingRentals = await Rental.find({ car });
+
+    // Function to check if two date ranges overlap
+    const isDateOverlap = (start1, end1, start2, end2) => {
+      return start1 <= end2 && end1 >= start2;
+    };
+
+    // Check for overlaps with existing rentals
+    for (const rental of existingRentals) {
+      const existingStartDate = new Date(rental.startDate);
+      const existingEndDate = new Date(rental.endDate);
+
+      if (
+        isDateOverlap(
+          newStartDate,
+          newEndDate,
+          existingStartDate,
+          existingEndDate
+        )
+      ) {
+        return NextResponse.json({
+          success: false,
+          message: "Masina nu este disponibila pentru data aleasa",
+        });
+      }
+    }
 
     // Update totalRentals for all existing rentals
     if (existingRentals.length > 0) {
