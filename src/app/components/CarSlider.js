@@ -30,6 +30,10 @@ const CarSlider = ({ isDarkMode }) => {
           }
         });
 
+        console.log("unique: ", uniqueCars);
+        // Sort cars in descending order by totalRentals
+        uniqueCars.sort((a, b) => b.totalRentals - a.totalRentals);
+
         setTopPicks(uniqueCars);
       } catch (error) {
         console.error("Error fetching top picks:", error);
