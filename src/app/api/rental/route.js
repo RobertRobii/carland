@@ -40,10 +40,17 @@ export async function POST(request) {
     // Check if any rentals exist with the same car name
     const existingRentals = await Rental.find({ car });
 
+    // Update totalRentals for all existing rentals
     if (existingRentals.length > 0) {
-      // Increment totalRentals for all rentals with the same car
       await Rental.updateMany({ car }, { $inc: { totalRentals: 1 } });
     }
+
+    // Retrieve the updated totalRentals for the new rental
+    const updatedExistingRentals = await Rental.find({ car });
+    const updatedTotalRentals =
+      updatedExistingRentals.length > 0
+        ? updatedExistingRentals[0].totalRentals
+        : totalRentals;
 
     const newRental = new Rental({
       fullname,
@@ -58,8 +65,7 @@ export async function POST(request) {
       returnTime,
       pricePerDay,
       totalPrice,
-      totalRentals:
-        existingRentals.length > 0 ? totalRentals + 1 : totalRentals,
+      totalRentals: updatedTotalRentals,
     });
 
     await newRental.save();
