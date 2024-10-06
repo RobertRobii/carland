@@ -47,6 +47,8 @@ const Cars = () => {
     router.push(`/cars/${carName}`);
   };
 
+  console.log(cars);
+
   const [open, setOpen] = useState(false);
 
   const carBrandsObject = {
@@ -266,14 +268,20 @@ const Cars = () => {
                             </p>
 
                             <p className="text-secondary">
-                              Available now:{" "}
+                              Available in:{" "}
                               <span className="uppercase">
-                                {car.available ? "Yes" : "No"}
+                                {car.availableCities.map((city, index) => (
+                                  <span key={city}>
+                                    {city}
+                                    {index < car.availableCities.length - 1 &&
+                                      ", "}
+                                  </span>
+                                ))}
                               </span>
                             </p>
                           </div>
                         </div>
-                        <div className="flex jusity-between items-center h-max">
+                        {/* <div className="flex jusity-between items-center h-max">
                           <h3
                             className={`text-lg font-bold mr-2 ${
                               isDarkMode ? "text-white" : "text-black"
@@ -282,7 +290,7 @@ const Cars = () => {
                             {car.star}
                           </h3>
                           <FaStar className="text-accent text-lg" />
-                        </div>
+                        </div> */}
                       </div>
                       <div className="flex gap-x-3 xl:gap-x-4 w-max mb-10">
                         {car.info.map((item, index) => {

@@ -1,5 +1,9 @@
 import React from "react";
 
+const getYear = () => {
+  return new Date().getFullYear();
+};
+
 const Copyright = ({ isDarkMode }) => {
   return (
     <div
@@ -7,7 +11,7 @@ const Copyright = ({ isDarkMode }) => {
         isDarkMode ? "text-white" : "text-black"
       } transition-all duration-300`}
     >
-      &copy; Carland 2024. All rights reserved.
+      &copy; Carland {getYear()}. All rights reserved.
     </div>
   );
 };

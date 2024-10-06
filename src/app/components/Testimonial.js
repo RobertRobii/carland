@@ -12,9 +12,7 @@ const Testimonial = ({ isDarkMode }) => {
           whileInView={"show"}
           viewport={{ once: true, amount: 0.6 }}
         >
-          <h1 className="h2 flex justify-center xl:justify-start mb-10">
-            What people say about us
-          </h1>
+          <h1 className="h2 mb-10 text-center">What people say about us</h1>
         </motion.div>
 
         <TestimonialSlider isDarkMode={isDarkMode} />

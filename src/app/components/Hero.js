@@ -15,7 +15,7 @@ const Hero = ({ isDarkMode }) => {
     <section
       className={`${
         isDarkMode ? "bg-neutral-900" : "bg-[#b2b7c2]/10"
-      } h-screen xl:h-[90vh] transition-all duration-300`}
+      } h-screen xl:h-[90vh] transition-all duration-300 mb-20`}
       id="home"
     >
       <div className="container mx-auto h-full xl:pt-10">

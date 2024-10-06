@@ -18,7 +18,7 @@ export async function POST(request) {
       from: email,
       to: process.env.EMAIL_USERNAME,
       subject: "Rental Confirmation",
-      text: message,
+      html: message,
     };
 
     let info = await transporter.sendMail(mailOptions);

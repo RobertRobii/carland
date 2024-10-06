@@ -6,7 +6,7 @@ export const cars = [
     star: 4.7,
     image: "/images/carSlider/mercedes-Eclass.png",
     logo: "/icons/brands/mercedes-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -37,7 +37,7 @@ export const cars = [
     star: 4.8,
     image: "/images/carSlider/audi-a6.png",
     logo: "/icons/brands/audi-logo.png",
-    available: false,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -68,7 +68,7 @@ export const cars = [
     star: 4.9,
     image: "/images/carSlider/bmw-3series.png",
     logo: "/icons/brands/bmw-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -99,7 +99,7 @@ export const cars = [
     star: 5.0,
     image: "/images/carSlider/golf-7.png",
     logo: "/icons/brands/volkswagen-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -130,7 +130,7 @@ export const cars = [
     star: 4.2,
     image: "/images/carSlider/vw-tiguan.png",
     logo: "/icons/brands/wolkswagen-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -161,7 +161,7 @@ export const cars = [
     star: 4.1,
     image: "/images/carSlider/opel-astra.png",
     logo: "/icons/brands/opel-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -192,7 +192,7 @@ export const cars = [
     star: 3.7,
     image: "/images/carSlider/skoda-rapid.png",
     logo: "/icons/brands/skoda-logo.png",
-    available: false,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -223,7 +223,7 @@ export const cars = [
     star: 3.5,
     image: "/images/carSlider/ford-fiesta.png",
     logo: "/icons/brands/ford-logo.png",
-    available: true,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -255,7 +255,7 @@ export const cars = [
     star: 4.2,
     image: "/images/carSlider/range-rover.png",
     logo: "/icons/brands/range-rover-logo.png",
-    available: false,
+    availableCities: ["Brasov", "Madrid", "Frankfurt"],
     info: [
       {
         icon: "icons/carSlider/gearshift.svg",
@@ -279,35 +279,35 @@ export const cars = [
       },
     ],
   },
-  {
-    type: "SUV",
-    name: "Mazda CX-5",
-    price: 28,
-    star: 4.0,
-    image: "/images/carSlider/mazda-cx5.png",
-    logo: "/icons/brands/mazda-logo.png",
-    available: true,
-    info: [
-      {
-        icon: "icons/carSlider/gearshift.svg",
-        text: "Manual",
-      },
-      {
-        icon: "icons/carSlider/seat.svg",
-        text: "5 Seats",
-      },
-      {
-        icon: "icons/carSlider/gas.svg",
-        text: "Gas",
-      },
-      {
-        icon: "icons/carSlider/engine.svg",
-        text: "170 HP",
-      },
-      {
-        icon: "icons/carSlider/wheel.svg",
-        text: "Front",
-      },
-    ],
-  },
+  // {
+  //   type: "SUV",
+  //   name: "Mazda CX-5",
+  //   price: 28,
+  //   star: 4.0,
+  //   image: "/images/carSlider/mazda-cx5.png",
+  //   logo: "/icons/brands/mazda-logo.png",
+  //   availableCities: ["Brasov", "Madrid", "Frankfurt"],
+  //   info: [
+  //     {
+  //       icon: "icons/carSlider/gearshift.svg",
+  //       text: "Manual",
+  //     },
+  //     {
+  //       icon: "icons/carSlider/seat.svg",
+  //       text: "5 Seats",
+  //     },
+  //     {
+  //       icon: "icons/carSlider/gas.svg",
+  //       text: "Gas",
+  //     },
+  //     {
+  //       icon: "icons/carSlider/engine.svg",
+  //       text: "170 HP",
+  //     },
+  //     {
+  //       icon: "icons/carSlider/wheel.svg",
+  //       text: "Front",
+  //     },
+  //   ],
+  // },
 ];
