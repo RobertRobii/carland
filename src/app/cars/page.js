@@ -47,8 +47,6 @@ const Cars = () => {
     router.push(`/cars/${carName}`);
   };
 
-  console.log(cars);
-
   const [open, setOpen] = useState(false);
 
   const carBrandsObject = {
