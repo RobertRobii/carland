@@ -201,20 +201,20 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                 {new Date(rental.endDate) < new Date() ? (
                   <div className="flex flex-col items-center">
                     <p className="text-secondary text-lg mb-6">
-                      Ai finalizat calatoria cu aceasta masina!
+                      You have completed the journey with this car!
                     </p>
                     <div
                       onClick={() => handleClickReview(rental.car)}
                       className="flex items-center text-lg hover:bg-accent text-accent hover:text-white border border-accent px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
                     >
                       <FaPen className="mr-2 text-xl" />
-                      Scrie un review
+                      Write a review
                     </div>
                   </div>
                 ) : (
                   <div className="flex flex-col items-center">
                     <p className="text-secondary text-lg mb-6">
-                      Inca nu ai inceput calatoria cu aceasta masina!
+                      You have not started the journey with this car!
                     </p>
                     <div
                       onClick={openCancelModal}

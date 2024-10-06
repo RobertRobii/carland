@@ -53,7 +53,7 @@ const Account = () => {
 
   return (
     <main
-      className={`max-w-[1920px] min-h-screen ${
+      className={`max-w-[1920px] min-h-[1000px] ${
         isDarkMode ? "bg-stone-900" : "bg-white"
       } mx-auto`}
     >

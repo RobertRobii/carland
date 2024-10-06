@@ -7,7 +7,6 @@ import { cars } from "/data/carsData";
 import { format } from "date-fns";
 import { parse } from "date-fns";
 import { differenceInDays } from "date-fns";
-import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "/variants";
@@ -54,7 +53,6 @@ const CarDetails = ({ params }) => {
     }, 1000);
   }, []);
 
-  const router = useRouter();
   const carname = params.carName[1];
   const decodedCarName = decodeURIComponent(carname);
 
@@ -157,8 +155,6 @@ const CarDetails = ({ params }) => {
           }),
         });
 
-        const data = await response.json();
-
         console.log("Data sent successfully");
         console.log("Email sent successfully");
         toast.success(
@@ -172,12 +168,17 @@ const CarDetails = ({ params }) => {
         setSelectedDate(null);
         setSelectedHours(null);
         setErrorMessage("");
-        // router.push("/");
       } else {
-        console.error("Error while sending data!");
-        toast.error("Failed to rent car. Please try again.", {
-          duration: 5000,
-        });
+        const data = await res.json();
+        console.log(data);
+        if (data.message) {
+          toast.error(data.message, { duration: 5000 });
+        } else {
+          console.error("Error while sending data!");
+          toast.error("Failed to rent car. Please try again.", {
+            duration: 5000,
+          });
+        }
       }
     } catch (error) {
       console.log("Error while sending data:", error);
@@ -294,7 +295,7 @@ const CarDetails = ({ params }) => {
                       <div className="flex justity-center xl:justify-start items-center mt-2">
                         <FaCircleInfo className="text-accent text-xl" />
                         <p className="ml-2 text-secondary text-center lg:text-left">
-                          It will help us if you'll choose your country!
+                          The payment will be made at one of our locations!
                         </p>
                       </div>
                     </motion.div>

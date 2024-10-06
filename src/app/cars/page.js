@@ -8,9 +8,12 @@ import SecondaryHeader from "../components/SecondaryHeader";
 
 import { cars } from "/data/carsData.js";
 import { FaStar } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
+import { Menu } from "@headlessui/react";
 
 const Cars = () => {
   const isLocalStorageAvailable =
@@ -44,6 +47,38 @@ const Cars = () => {
     router.push(`/cars/${carName}`);
   };
 
+  const [open, setOpen] = useState(false);
+
+  const carBrandsObject = {
+    BMW: false,
+    Audi: false,
+    Mercedes: false,
+  };
+
+  const locationsObject = {
+    "Brasov, Romania": false,
+    "Frankfurt, Germany": false,
+    "Madrid, Spain": false,
+  };
+
+  const [selectedBrands, setSelectedBrands] = useState(carBrandsObject);
+  const [selectedLocations, setSelectedLocations] = useState(locationsObject);
+
+  // Update the selected brands state
+  const handleCheckboxChange = (item, setSelectedItems) => {
+    setSelectedItems((prev) => ({
+      ...prev,
+      [item]: !prev[item],
+    }));
+  };
+
+  // Count the selected brands
+  const selectedBrandsCount =
+    Object.values(selectedBrands).filter(Boolean).length;
+  // Count the selected locations
+  const selectedLocationsCount =
+    Object.values(selectedLocations).filter(Boolean).length;
+
   return (
     <main
       className={`max-w-[1920px] min-h-screen ${
@@ -65,12 +100,138 @@ const Cars = () => {
           <div className="container mx-auto h-full pt-20 xl:pt-10">
             <div className="text-center xl:w-full xl:text-left mt-16">
               <h1
-                className={`h2 flex justify-center xl:justify-start ${
+                className={`h2 flex justify-center xl:justify-start lg:ml-4 ml-0 ${
                   isDarkMode ? "text-white" : ""
                 }`}
               >
                 Our cars
               </h1>
+
+              <div className="flex justify-end mb-4 gap-x-4">
+                <div className="flex items-center">
+                  <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                      <Menu.Button
+                        onClick={() => setOpen(!open)}
+                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white pr-3 py-2 text-sm font-semibold text-gray-900"
+                      >
+                        Location
+                      </Menu.Button>
+                    </div>
+                    {open && (
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          {Object.keys(selectedLocations).map((location) => (
+                            <Menu.Item as="div" key={location}>
+                              {({ active }) => (
+                                <label
+                                  className={`flex items-center gap-2 px-4 py-2 text-sm ${
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700"
+                                  }`}
+                                  onClick={(e) => e.stopPropagation()} // prevent menu from closing
+                                >
+                                  <input
+                                    type="checkbox"
+                                    className="form-checkbox"
+                                    checked={selectedLocations[location]}
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        location,
+                                        setSelectedLocations
+                                      )
+                                    }
+                                  />
+                                  {location}
+                                </label>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </div>
+                      </Menu.Items>
+                    )}
+                  </Menu>
+
+                  <p className="bg-gray-200 px-2 rounded-md">
+                    {selectedLocationsCount}
+                  </p>
+                </div>
+
+                <div className="inline-block h-[40px] w-0.5 self-stretch bg-gray-200"></div>
+
+                <div className="flex items-center">
+                  <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                      <Menu.Button
+                        onClick={() => setOpen(!open)}
+                        className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white pr-3 py-2 text-sm font-semibold text-gray-900"
+                      >
+                        Car brand
+                      </Menu.Button>
+                    </div>
+                    {open && (
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          {Object.keys(selectedBrands).map((brand) => (
+                            <Menu.Item as="div" key={brand}>
+                              {({ active }) => (
+                                <label
+                                  className={`flex items-center gap-2 px-4 py-2 text-sm ${
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700"
+                                  }`}
+                                  onClick={(e) => e.stopPropagation()} // prevent menu from closing
+                                >
+                                  <input
+                                    type="checkbox"
+                                    className="form-checkbox"
+                                    checked={selectedBrands[brand]}
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        brand,
+                                        setSelectedBrands
+                                      )
+                                    }
+                                  />
+                                  {brand}
+                                </label>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </div>
+                      </Menu.Items>
+                    )}
+                  </Menu>
+                  <p className="bg-gray-200 px-2 rounded-md">
+                    {selectedBrandsCount}
+                  </p>
+                </div>
+              </div>
+
+              <div className="w-full bg-gray-100 rounded-xl">
+                <div className="flex flex-col lg:flex-row justify-start items-center py-6">
+                  <p className="lg:border-r mb-4 lg:mb-0 border-gray-300 px-3">
+                    Filters
+                  </p>
+                  <div className="flex flex-col lg:flex-row justify-start items-center gap-y-4 lg:gap-x-4 px-3">
+                    <div className="rounded-full px-4 py-1 border bg-white flex justify-center items-center">
+                      <p>Option 1</p>
+                      <IoMdClose className="ms-3 rounded-full hover:bg-gray-200 cursor-pointer" />
+                    </div>
+                    <div className="rounded-full px-4 py-1 border bg-white flex justify-center items-center">
+                      <p>Option 1</p>
+                      <IoMdClose className="ms-3 rounded-full hover:bg-gray-200 cursor-pointer" />
+                    </div>
+                    <div className="rounded-full px-4 py-1 border bg-white flex justify-center items-center">
+                      <p>Option 1</p>
+                      <IoMdClose className="ms-3 rounded-full hover:bg-gray-200 cursor-pointer" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex justify-center flex-wrap gap-x-10 gap-y-10 py-10">
                 {cars.map((car, index) => {
                   return (
