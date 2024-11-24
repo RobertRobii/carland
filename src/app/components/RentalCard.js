@@ -45,7 +45,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   };
 
   useEffect(() => {
-    if (rentalData.rentals.length === 0) {
+    if (rentalData.rentals) {
       refetchRentals();
     }
   }, [rentalData.rentals]);
