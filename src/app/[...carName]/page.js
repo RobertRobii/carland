@@ -139,8 +139,9 @@ const CarDetails = ({ params }) => {
       console.log("res:", res);
 
       if (res.ok) {
-        const data = await res.json();
-        console.log("data:", data);
+        console.log("res ok");
+        // const data = await res.json();
+        // console.log("data:", data);
       }
 
       // if (data.success) {
