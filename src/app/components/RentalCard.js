@@ -39,6 +39,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           );
           setRentalData({ rentals: userRentals });
           setIsLoading(false);
+
+          console.log(userRentals);
         }
       } catch (error) {
         console.error(error);
