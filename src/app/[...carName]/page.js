@@ -110,7 +110,7 @@ const CarDetails = ({ params }) => {
 
       daysDifference = differenceInDays(endDate, startDate);
       adjustedDaysDifference = daysDifference === 0 ? 1 : daysDifference;
-      console.log("Rental days:", adjustedDaysDifference);
+      // console.log("Rental days:", adjustedDaysDifference);
     }
 
     try {
@@ -136,9 +136,15 @@ const CarDetails = ({ params }) => {
         }),
       });
 
+      console.log("res:", res);
+
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       const data = await res.json();
 
-      console.log(data);
+      console.log("data:", data);
 
       if (data.success) {
         // const emailTemplate = `
@@ -203,9 +209,7 @@ const CarDetails = ({ params }) => {
         console.error(
           "Error while sending data!",
           "data message:",
-          data.message,
-          "data:",
-          data
+          data.message
         );
         toast.error(data.message || "Failed to rent car. Please try again.", {
           duration: 5000,
