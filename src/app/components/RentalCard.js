@@ -32,17 +32,13 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     try {
       if (res.ok) {
         const data = await res.json();
-        console.log("Rentals fetched:", data.rentals);
         const userRentals = data.rentals.filter(
           (rental) => rental.email === userEmail
         );
-        console.log("Filtered user rentals:", userRentals);
         setRentalData({ rentals: userRentals });
-      } else {
-        console.error("Failed to fetch rentals");
       }
     } catch (error) {
-      console.error("Error refetching rentals:", error);
+      console.error("Error fetching rentals:", error);
     }
   };
 
@@ -60,8 +56,6 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           setIsLoading(false);
 
           console.log("Rentals:", userRentals);
-
-          refetchRentals();
         }
       } catch (error) {
         console.error(error);
@@ -85,11 +79,14 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
       });
 
       if (res.ok) {
+        // Actualizezi starea locală pentru a elimina închirierea ștearsă
         const updatedRentals = rentalData.rentals.filter(
           (rental) => rental._id !== rentalId
         );
-        console.log("Updated rentals after cancellation:", updatedRentals);
         setRentalData({ rentals: updatedRentals });
+
+        // Apelezi funcția pentru a refetch-ui noile date
+        refetchRentals();
 
         const response = await fetch("/api/sendCancelRentalEmail", {
           method: "POST",
@@ -100,7 +97,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
             name: session?.user?.name,
             email: session?.user?.email,
             message:
-              "Your cancelation has been confirmed! Please let us know why you chose to cancel your rental.",
+              "Your cancellation has been confirmed! Please let us know why you chose to cancel your rental.",
           }),
         });
 
@@ -109,11 +106,9 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
         console.log("Data sent successfully");
         console.log("Email sent successfully");
         toast.success(
-          "Rental cancelled successfull! You'll receive a confirmation email shortly.",
+          "Rental cancelled successfully! You'll receive a confirmation email shortly.",
           { duration: 5000 }
         );
-
-        refetchRentals();
       } else {
         console.error("Failed to cancel rental");
         toast.error("Failed to cancel rental!", { duration: 5000 });
