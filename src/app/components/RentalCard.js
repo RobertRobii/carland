@@ -27,17 +27,19 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     setIsCancelModalOpen(true);
   };
 
-  // Refetch the rentals after a cancellation
   const refetchRentals = async () => {
     const res = await fetch("/api/getRentals");
     try {
       if (res.ok) {
         const data = await res.json();
+        console.log("Rentals fetched:", data.rentals);
         const userRentals = data.rentals.filter(
           (rental) => rental.email === userEmail
         );
+        console.log("Filtered user rentals:", userRentals);
         setRentalData({ rentals: userRentals });
-        console.log("Refetched rentals:", userRentals);
+      } else {
+        console.error("Failed to fetch rentals");
       }
     } catch (error) {
       console.error("Error refetching rentals:", error);
@@ -57,7 +59,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           setRentalData({ rentals: userRentals });
           setIsLoading(false);
 
-          console.log(userRentals);
+          console.log("Rentals:", userRentals);
         }
       } catch (error) {
         console.error(error);
@@ -70,6 +72,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
 
   const handleCancelRental = async (rentalId) => {
     try {
+      console.log(rentalId);
+
       const res = await fetch("/api/cancelRental", {
         method: "DELETE",
         headers: {
@@ -82,6 +86,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
         const updatedRentals = rentalData.rentals.filter(
           (rental) => rental._id !== rentalId
         );
+        console.log("Updated rentals after cancellation:", updatedRentals);
         setRentalData({ rentals: updatedRentals });
 
         const response = await fetch("/api/sendCancelRentalEmail", {
@@ -93,18 +98,19 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
             name: session?.user?.name,
             email: session?.user?.email,
             message:
-              "Your cancellation has been confirmed! Please let us know why you chose to cancel your rental.",
+              "Your cancelation has been confirmed! Please let us know why you chose to cancel your rental.",
           }),
         });
 
         const data = await response.json();
+
         console.log("Data sent successfully");
+        console.log("Email sent successfully");
         toast.success(
-          "Rental cancelled successfully! You'll receive a confirmation email shortly.",
+          "Rental cancelled successfull! You'll receive a confirmation email shortly.",
           { duration: 5000 }
         );
 
-        // Call the refetchRentals function to update the rental list after cancellation
         refetchRentals();
       } else {
         console.error("Failed to cancel rental");
@@ -122,6 +128,20 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:flex-wrap lg:px-20 xl:px-0">
+        {/* {isLoading && (
+          <SkeletonTheme color={"#f4f4f4"} highlightColor={"#e0e0e0"}>
+            <div className="w-[600px] flex justify-between p-4 rounded-lg border mb-10">
+              <div>
+                <Skeleton count={1} height={120} width={180} className="mb-3" />
+                <Skeleton count={1} width={180} height={22} />
+              </div>
+              <div>
+                <Skeleton count={5} height={22} width={250} className="mb-2" />
+              </div>
+            </div>
+          </SkeletonTheme>
+        )} */}
+
         {rentalData.rentals && rentalData.rentals.length > 0 ? (
           rentalData.rentals.map((rental) => (
             <div
@@ -244,24 +264,30 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
                       }}
                     >
                       <div className="flex justify-start items-center mb-4">
-                        <FaInfoCircle className="text-accent text-3xl" />
-                        <h2 className="text-xl font-semibold ml-4">
-                          Cancel rental
+                        <FaInfoCircle className="text-accent text-xl mr-2" />
+                        <h2 className="text-xl lg:text-2xl font-bold">
+                          Rental Cancellation
                         </h2>
                       </div>
-                      <p>Are you sure you want to cancel this rental?</p>
-                      <div className="flex justify-between mt-6">
+
+                      <p className="mb-6 text-xl">
+                        Are you sure you want to cancel this rental?
+                      </p>
+                      <div className="flex flex-col lg:flex-row justify-between">
                         <button
-                          onClick={() => handleCancelRental(rental._id)}
-                          className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg"
+                          className="bg-white text-accent py-2 px-4 rounded-lg mr-4 border border-accent hover:bg-accent hover:text-white transition-all duration-300 mb-4 lg:mb-0"
+                          onClick={() => setIsCancelModalOpen(false)}
                         >
-                          Cancel Rental
+                          No, take me back!
                         </button>
                         <button
-                          onClick={() => setIsCancelModalOpen(false)}
-                          className="border border-accent text-accent px-6 py-2 rounded-lg"
+                          className="bg-green-500 text-white py-2 px-4 rounded-lg mr-4 border border-green-500 hover:bg-white hover:text-green-500 transition-all duration-300"
+                          onClick={() => {
+                            handleCancelRental(rental._id);
+                            setIsCancelModalOpen(false);
+                          }}
                         >
-                          Close
+                          Yes, I'm sure!
                         </button>
                       </div>
                     </div>
@@ -271,11 +297,13 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
             </div>
           ))
         ) : (
-          <p>No rentals found</p>
+          <div className="h2 text-center text-accent mt-10">
+            There are no rentals yet!
+          </div>
         )}
-      </div>
 
-      <Toaster />
+        <Toaster />
+      </div>
     </div>
   );
 };
