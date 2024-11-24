@@ -138,13 +138,10 @@ const CarDetails = ({ params }) => {
 
       console.log("res:", res);
 
-      if (!res.ok) {
-        throw new Error("Network response was not ok");
+      if (res.ok) {
+        const data = await res.json();
+        console.log("data:", data);
       }
-
-      const data = await res.json();
-
-      console.log("data:", data);
 
       // if (data.success) {
       //   const emailTemplate = `
