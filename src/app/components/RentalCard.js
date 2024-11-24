@@ -79,13 +79,11 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
       });
 
       if (res.ok) {
-        // Actualizezi starea locală pentru a elimina închirierea ștearsă
         const updatedRentals = rentalData.rentals.filter(
           (rental) => rental._id !== rentalId
         );
         setRentalData({ rentals: updatedRentals });
 
-        // Apelezi funcția pentru a refetch-ui noile date
         refetchRentals();
 
         const response = await fetch("/api/sendCancelRentalEmail", {
