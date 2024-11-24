@@ -27,6 +27,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     setIsCancelModalOpen(true);
   };
 
+  // refetch rentals
   const refetchRentals = async () => {
     const res = await fetch("/api/getRentals");
     try {
