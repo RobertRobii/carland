@@ -37,6 +37,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           (rental) => rental.email === userEmail
         );
         setRentalData({ rentals: userRentals });
+        console.log("Refetched rentals:", userRentals);
       }
     } catch (error) {
       console.error("Error refetching rentals:", error);
@@ -55,6 +56,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           );
           setRentalData({ rentals: userRentals });
           setIsLoading(false);
+
+          console.log(userRentals);
         }
       } catch (error) {
         console.error(error);
