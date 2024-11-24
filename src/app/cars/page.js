@@ -47,7 +47,16 @@ const Cars = () => {
     router.push(`/cars/${carName}`);
   };
 
-  const [open, setOpen] = useState(false);
+  const [openLocations, setOpenLocations] = useState(false);
+  const [openBrands, setOpenBrands] = useState(false);
+
+  const setOpenBrandsHandler = () => {
+    setOpenBrands((prev) => !prev);
+  };
+
+  const setOpenLocationsHandler = () => {
+    setOpenLocations((prev) => !prev);
+  };
 
   const carBrandsObject = {
     BMW: false,
@@ -112,13 +121,13 @@ const Cars = () => {
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
                       <Menu.Button
-                        onClick={() => setOpen(!open)}
+                        onClick={setOpenLocationsHandler}
                         className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white pr-3 py-2 text-sm font-semibold text-gray-900"
                       >
                         Location
                       </Menu.Button>
                     </div>
-                    {open && (
+                    {openLocations && (
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
                           {Object.keys(selectedLocations).map((location) => (
@@ -164,13 +173,13 @@ const Cars = () => {
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
                       <Menu.Button
-                        onClick={() => setOpen(!open)}
+                        onClick={setOpenBrandsHandler}
                         className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white pr-3 py-2 text-sm font-semibold text-gray-900"
                       >
                         Car brand
                       </Menu.Button>
                     </div>
-                    {open && (
+                    {openBrands && (
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
                           {Object.keys(selectedBrands).map((brand) => (
@@ -227,6 +236,11 @@ const Cars = () => {
                     <div className="rounded-full px-4 py-1 border bg-white flex justify-center items-center">
                       <p>Option 1</p>
                       <IoMdClose className="ms-3 rounded-full hover:bg-gray-200 cursor-pointer" />
+                    </div>
+                    <div>
+                      <button className="btn btn-sm bg-accent w-28 right-0">
+                        Apply
+                      </button>
                     </div>
                   </div>
                 </div>
