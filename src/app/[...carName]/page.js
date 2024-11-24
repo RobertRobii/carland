@@ -139,56 +139,56 @@ const CarDetails = ({ params }) => {
       const data = await res.json();
 
       if (data.success) {
-        const emailTemplate = `
-            <html>
-              <body>
-                <h3>Here are the details of your rental:</h3>
-                <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
-                  <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Car: ${
-                    selectedCar.name
-                  }</div>
-                  <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Location: ${selectedLocation}</div>
-                </div>
-                <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
-                  <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Pick up time: ${format(
-                    selectedDate[0].startDate,
-                    "dd.MM.yyyy"
-                  )} at ${selectedHours}</div>
-                <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Return time: ${format(
-                  selectedDate[0].endDate,
-                  "dd.MM.yyyy"
-                )} at ${selectedHours}</div>
-                </div>
-                <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
-                  <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Price per day: ${
-                    selectedCar.price
-                  }€</div>
-                <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Total price: ${
-                  adjustedDaysDifference * selectedCar.price
-                }€</div>
-                </div>
-                <h5>Thank you for choosing us!</h5>
-              </body>
-            </html>
-            `;
+        // const emailTemplate = `
+        //     <html>
+        //       <body>
+        //         <h3>Here are the details of your rental:</h3>
+        //         <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
+        //           <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Car: ${
+        //             selectedCar.name
+        //           }</div>
+        //           <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Location: ${selectedLocation}</div>
+        //         </div>
+        //         <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
+        //           <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Pick up time: ${format(
+        //             selectedDate[0].startDate,
+        //             "dd.MM.yyyy"
+        //           )} at ${selectedHours}</div>
+        //         <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Return time: ${format(
+        //           selectedDate[0].endDate,
+        //           "dd.MM.yyyy"
+        //         )} at ${selectedHours}</div>
+        //         </div>
+        //         <div style="width: 400px; display: flex; justify-content: space-between; margin-bottom: 20px; text-align: center;">
+        //           <div style="width: 100px; margin-right: auto; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Price per day: ${
+        //             selectedCar.price
+        //           }€</div>
+        //         <div style="width: 100px; background-color: #FF6969; border: 2px solid #FF0000; font-weight: bold; padding: 10px; border-radius: 10px;">Total price: ${
+        //           adjustedDaysDifference * selectedCar.price
+        //         }€</div>
+        //         </div>
+        //         <h5>Thank you for choosing us!</h5>
+        //       </body>
+        //     </html>
+        //     `;
 
-        await fetch("/api/sendEmail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: fullname,
-            email: email,
-            message: emailTemplate,
-          }),
-        });
+        // await fetch("/api/sendEmail", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     name: fullname,
+        //     email: email,
+        //     message: emailTemplate,
+        //   }),
+        // });
 
-        console.log("Email sent successfully");
-        toast.success(
-          "Rental confirmed. A confirmation mail has been sent to you!",
-          { duration: 5000 }
-        );
+        // console.log("Email sent successfully");
+        // toast.success(
+        //   "Rental confirmed. A confirmation mail has been sent to you!",
+        //   { duration: 5000 }
+        // );
         setFullname("");
         setEmail("");
         setPhone("");
@@ -198,7 +198,13 @@ const CarDetails = ({ params }) => {
         setErrorMessage("");
         // router.push("/");
       } else {
-        console.error("Error while sending data!");
+        console.error(
+          "Error while sending data!",
+          "data message:",
+          data.message,
+          "data:",
+          data
+        );
         toast.error(data.message || "Failed to rent car. Please try again.", {
           duration: 5000,
         });
