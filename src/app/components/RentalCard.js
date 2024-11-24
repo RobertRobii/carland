@@ -22,6 +22,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   const [rentalData, setRentalData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [rentalCreated, setRentalCreated] = useState(false);
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -39,6 +40,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           );
           setRentalData({ rentals: userRentals });
           setIsLoading(false);
+          setRentalCreated((prevState) => !prevState);
         }
       } catch (error) {
         console.error(error);
@@ -47,7 +49,7 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     };
 
     getRentals();
-  }, [userEmail]);
+  }, [userEmail, rentalCreated]);
 
   const handleCancelRental = async (rentalId) => {
     try {
