@@ -60,6 +60,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           setIsLoading(false);
 
           console.log("Rentals:", userRentals);
+
+          refetchRentals();
         }
       } catch (error) {
         console.error(error);
