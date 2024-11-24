@@ -37,12 +37,18 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           (rental) => rental.email === userEmail
         );
         setRentalData({ rentals: userRentals });
-        console.log("Refetched Rentals:", userRentals);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error fetching rentals:", error);
     }
   };
+
+  useEffect(() => {
+    if (rentalData.rentals.length === 0) {
+      refetchRentals();
+    }
+  }, [rentalData.rentals]);
 
   useEffect(() => {
     const getRentals = async () => {
@@ -70,8 +76,6 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
 
   const handleCancelRental = async (rentalId) => {
     try {
-      console.log(rentalId);
-
       const res = await fetch("/api/cancelRental", {
         method: "DELETE",
         headers: {
@@ -81,13 +85,16 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
       });
 
       if (res.ok) {
+        // Filtrezi direct datele deja disponibile, fără a apela din nou API-ul
         const updatedRentals = rentalData.rentals.filter(
           (rental) => rental._id !== rentalId
         );
         setRentalData({ rentals: updatedRentals });
 
+        // Aici poți apela funcția de refetch dacă dorești să aduci cele mai recente date
         refetchRentals();
 
+        // Trimiterea emailului
         const response = await fetch("/api/sendCancelRentalEmail", {
           method: "POST",
           headers: {
@@ -102,15 +109,11 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
         });
 
         const data = await response.json();
-
-        console.log("Data sent successfully");
-        console.log("Email sent successfully");
         toast.success(
           "Rental cancelled successfully! You'll receive a confirmation email shortly.",
           { duration: 5000 }
         );
       } else {
-        console.error("Failed to cancel rental");
         toast.error("Failed to cancel rental!", { duration: 5000 });
       }
     } catch (error) {
