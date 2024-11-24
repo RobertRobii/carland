@@ -139,9 +139,13 @@ const CarDetails = ({ params }) => {
       console.log("res:", res);
 
       if (res.ok) {
-        console.log("res ok");
-        // const data = await res.json();
-        // console.log("data:", data);
+        setFullname("");
+        setEmail("");
+        setPhone("");
+        setSelectedLocation(null);
+        setSelectedDate(null);
+        setSelectedHours(null);
+        setErrorMessage("");
       }
 
       // if (data.success) {
