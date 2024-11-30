@@ -51,21 +51,21 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     getRentals();
   }, [userEmail]);
 
-  // const refetchRentals = async () => {
-  //   try {
-  //     const res = await fetch("/api/getRentals");
+  const refetchRentals = async () => {
+    try {
+      const res = await fetch("/api/getRentals");
 
-  //     if (res.ok) {
-  //       const data = await res.json();
-  //       const updatedUserRentals = data.rentals.filter(
-  //         (rental) => rental.email === userEmail
-  //       );
-  //       setRentalData({ rentals: updatedUserRentals });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+      if (res.ok) {
+        const data = await res.json();
+        const updatedUserRentals = data.rentals.filter(
+          (rental) => rental.email === userEmail
+        );
+        setRentalData({ rentals: updatedUserRentals });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleCancelRental = async (rentalId) => {
     try {
