@@ -32,6 +32,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
         const userRentals = data.rentals.filter(
           (rental) => rental.email === userEmail
         );
+        console.log("userRentals:", userRentals);
+
         setRentalData({ rentals: userRentals });
       } catch (error) {
         console.error("Error fetching rentals:", error);
