@@ -51,22 +51,6 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     getRentals();
   }, [userEmail]);
 
-  // const refetchRentals = async () => {
-  //   try {
-  //     const res = await fetch("/api/getRentals");
-
-  //     if (res.ok) {
-  //       const data = await res.json();
-  //       const updatedUserRentals = data.rentals.filter(
-  //         (rental) => rental.email === userEmail
-  //       );
-  //       setRentalData({ rentals: updatedUserRentals });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   const handleCancelRental = async (rentalId) => {
     try {
       const res = await fetch("/api/cancelRental", {
@@ -83,8 +67,6 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
         );
         console.log("Updated rentals after cancellation:", updatedRentals);
         setRentalData({ rentals: updatedRentals });
-
-        // refetchRentals();
 
         // Trimiterea emailului
         // const response = await fetch("/api/sendCancelRentalEmail", {
@@ -105,6 +87,8 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           "Rental cancelled successfully! You'll receive a confirmation email shortly.",
           { duration: 5000 }
         );
+
+        await getRentals();
       } else {
         toast.error("Failed to cancel rental!", { duration: 5000 });
       }
