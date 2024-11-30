@@ -14,8 +14,6 @@ export const connectMongoDB = async () => {
 
   try {
     const db = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
     });
     isConnected = db.connections[0].readyState === 1;
