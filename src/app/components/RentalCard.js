@@ -88,7 +88,6 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
           { duration: 5000 }
         );
 
-        await getRentals();
         console.log("refetch data:", rentalData);
       } else {
         toast.error("Failed to cancel rental!", { duration: 5000 });

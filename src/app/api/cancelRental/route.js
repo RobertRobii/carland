@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "/utils/mongodb";
 import Rental from "/models/Rental";
 
-export async function DELETE(request) {
+export async function DELETE(request, response) {
+  response.setHeader("Cache-Control", "no-store, max-age=0");
   try {
     await connectMongoDB();
 
