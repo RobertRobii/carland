@@ -6,8 +6,6 @@ import { format } from "date-fns";
 
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaInfoCircle, FaPen } from "react-icons/fa";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
@@ -19,55 +17,24 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [rentalData, setRentalData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [rentalData, setRentalData] = useState({ rentals: [] });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
-  const openCancelModal = () => {
-    setIsCancelModalOpen(true);
-  };
+  const openCancelModal = () => setIsCancelModalOpen(true);
 
-  // refetch rentals
-  const refetchRentals = async () => {
-    const res = await fetch("/api/getRentals");
-    try {
-      if (res.ok) {
+  useEffect(() => {
+    const getRentals = async () => {
+      try {
+        const res = await fetch("/api/getRentals");
+        if (!res.ok) throw new Error("Failed to fetch rentals");
+
         const data = await res.json();
         const userRentals = data.rentals.filter(
           (rental) => rental.email === userEmail
         );
         setRentalData({ rentals: userRentals });
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.error("Error fetching rentals:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (rentalData.rentals) {
-      refetchRentals();
-    }
-  }, [rentalData.rentals]);
-
-  useEffect(() => {
-    const getRentals = async () => {
-      const res = await fetch("/api/getRentals");
-
-      try {
-        if (res.ok) {
-          const data = await res.json();
-          const userRentals = data.rentals.filter(
-            (rental) => rental.email === userEmail
-          );
-          setRentalData({ rentals: userRentals });
-          setIsLoading(false);
-
-          console.log("Rentals:", userRentals);
-        }
       } catch (error) {
-        console.error(error);
-        setIsLoading(false);
+        console.error("Error fetching rentals:", error);
       }
     };
 
@@ -78,52 +45,40 @@ const RentalCard = ({ isDarkMode, userEmail }) => {
     try {
       const res = await fetch("/api/cancelRental", {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rentalId }),
       });
 
-      if (res.ok) {
-        // Filtrezi direct datele deja disponibile, fără a apela din nou API-ul
-        const updatedRentals = rentalData.rentals.filter(
-          (rental) => rental._id !== rentalId
-        );
-        setRentalData({ rentals: updatedRentals });
+      if (!res.ok) throw new Error("Failed to cancel rental");
 
-        // Aici poți apela funcția de refetch dacă dorești să aduci cele mai recente date
-        refetchRentals();
+      // Update rentals locally
+      setRentalData((prev) => ({
+        rentals: prev.rentals.filter((rental) => rental._id !== rentalId),
+      }));
 
-        // Trimiterea emailului
-        const response = await fetch("/api/sendCancelRentalEmail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: session?.user?.name,
-            email: session?.user?.email,
-            message:
-              "Your cancellation has been confirmed! Please let us know why you chose to cancel your rental.",
-          }),
-        });
+      // Send cancellation email
+      await fetch("/api/sendCancelRentalEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: session?.user?.name,
+          email: session?.user?.email,
+          message:
+            "Your cancellation has been confirmed! Please let us know why you chose to cancel your rental.",
+        }),
+      });
 
-        const data = await response.json();
-        toast.success(
-          "Rental cancelled successfully! You'll receive a confirmation email shortly.",
-          { duration: 5000 }
-        );
-      } else {
-        toast.error("Failed to cancel rental!", { duration: 5000 });
-      }
+      toast.success(
+        "Rental cancelled successfully! You'll receive a confirmation email shortly.",
+        { duration: 5000 }
+      );
     } catch (error) {
       console.error("Error cancelling rental:", error);
+      toast.error("Failed to cancel rental!", { duration: 5000 });
     }
   };
 
-  const handleClickReview = (carName) => {
-    router.push(`/cars/${carName}`);
-  };
+  const handleClickReview = (carName) => router.push(`/cars/${carName}`);
 
   return (
     <div>
